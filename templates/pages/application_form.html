@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+{% load i18n static recaptcha3 %}
+
+
+{% block title %}{% trans 'Application' %}{% endblock %}
+
+{% block css %}
+    {% recaptcha_init %}
+
+    <style>
+        .swal-messages li {
+            font-size: 1.3em;
+            line-height: 2;
+        }
+        .swal-button-container {
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block js %}
+
+    {% recaptcha_ready action_name='application_form' %}
+
+    <script>
+        $('#{{ form.region.auto_id }}').selectpicker({
+            dropupAuto: false,
+            size: 5
+        });
+
+        {% if messages %}
+
+            let msg = $('<ul class="list-unstyled mx-auto my-0 swal-messages"></ul>');
+
+            {% for message in messages %}
+                {% if message.level_tag == 'error' %}
+                    msg.append('<li><i class="fa fa-times"></i> {{ message }} <br /></li>');
+                {% elif message.level_tag == 'success' %}
+                    msg.append('<li><i class="fa fa-check"></i> {{ message }} <br /></li>');
+                {% elif message.level_tag == 'info' %}
+                    msg.append('<li><i class="fa fa-info"></i> {{ message }} <br /></li>');
+                {% endif %}
+            {% endfor %}
+
+            swal("", {
+                content: msg[0],
+                icon: 'info'
+            });
+        {% endif %}
+
+        const messages = {
+           title: 'We have received your message succesfullly',
+           titleError: 'It cant be sent checkout internet',
+           success: `<li><i class="fa fa-check"></i></li>`,
+           failure: `<li><i class="fa fa-times"></i></li>`
+        };
+
+        const formApplication = document.querySelector('.application__form');
+        formApplication.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const formData = new FormData(formApplication);
+            const json = JSON.stringify(Object.fromEntries(formData.entries()));
+            const postData = async function () {
+                let token = document.cookie.split("; ").filter(t=>"csrftoken"===t.split("=")[0])[0].split("=")[1];
+                const data = await fetch("/api/typo-report", {
+                    method: "POST",
+                    body: json,
+                    mode: "same-origin",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": token
+                    }
+                })
+                return data.json();
+            }
+            postData().then(function () {
+                window.swal({
+                    title: `${ messages.title }`,
+                    icon: "info",
+                    position: "center",
+                    html: `<p>${ messages.success }</p> `
+                })
+                formApplication.reset();
+            }).catch(function () {
+                window.swal({
+                    title: `${ messages.titleError }`,
+                    icon: "error",
+                    position: "center",
+                    html: `<p>${ messages.error }</p> `
+                });
+            /*
+            }).finally(function () {
+                formApplication.reset();
+            */
+            })
+        });
+
+    </script>
+
+{% endblock %}
+
+{% block content %}
+    <div class="page-content">
+        <div class="container">
+            <div class="row">
+                <div class="offset-2 col-8">
+                    <div class="text-center mb-4 title">
+                        <h2 class="page-title">{% trans 'Send your appeal' %}</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-2 col-8">
+
+                    <form enctype="multipart/form-data" method="post" class="form-group" action="{% url 'application_form' %}" class="contact-one__form">
+                        {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <p class="contact-one__field application__input">
+                                    <input required class="form-control"
+                                           type="{{ form.full_name.field.widget.input_type }}"
+                                           name="{{ form.full_name.name }}"
+                                           id="{{ form.full_name.auto_id }}"
+                                    >
+                                    <label for="{{ form.full_name.auto_id }}">{{ form.full_name.label }}</label>
+                                </p>
+                            </div>
+                            <div class="col-lg-4">
+                                <p class="contact-one__field application__input">
+                                    <input required class="form-control"
+                                           type="{{ form.email.field.widget.input_type }}"
+                                           name="{{ form.email.name }}"
+                                           id="{{ form.email.auto_id }}"
+                                    >
+                                    <label for="{{ form.email.auto_id }}">{{ form.email.label }}</label>
+                                </p>
+                            </div>
+                            <div class="col-lg-4">
+                                <p class="contact-one__field application__input">
+                                    <input required class="form-control"
+                                           type="{{ form.phone_number.field.widget.input_type }}"
+                                           name="{{ form.phone_number.name }}"
+                                           id="{{ form.phone_number.auto_id }}"
+                                    >
+                                    <label for="{{ form.phone_number.auto_id }}">{{ form.phone_number.label }}</label>
+                                </p>
+                            </div>
+                            <div class="col-lg-6">
+                                <p class="contact-one__field application__input">
+                                    <input required class="form-control"
+                                           type="{{ form.address.field.widget.input_type }}"
+                                           name="{{ form.address.name }}"
+                                           id="{{ form.address.auto_id }}"
+                                    >
+                                    <label for="{{ form.address.auto_id }}">{{ form.address.label }}</label>
+                                </p>
+                            </div>
+                            <div class="col-lg-6">
+                                <p class="contact-one__{{ form.region.name }}">
+                                    <label for="{{ form.region.auto_id }}">{{ form.region.label }}:</label>
+                                    <select id="{{ form.region.auto_id }}" name="{{ form.region.name }}">
+                                        {% for form in form.region.field.choices %}
+                                            <option value="{{ form.0 }}">{{ form.1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </p>
+                            </div>
+                            <div class="col-lg-12">
+                                <p class="contact-one__field">
+                                    <label for="{{ form.file.auto_id }}">
+                                        {{ form.file.label }}
+                                    </label>
+                                    <input class="form-control"
+                                           type="{{ form.file.field.widget.input_type }}"
+                                           name="{{ form.file.name }}"
+                                           id="{{ form.file.auto_id }}"
+                                    >
+                                </p>
+                            </div>
+                            <div class="col-lg-12">
+                                <p class="contact-one__field application__input">
+                                    <textarea required class="form-control"
+                                              name="{{ form.content.name }}"
+                                              id="{{ form.content.auto_id }}"></textarea>
+                                    <label for="{{ form.content.auto_id }}">{{ form.content.label }}</label>
+                                </p>
+                            </div>
+                            <div class="col-lg-12">
+                                <p class="contact-one__field">
+                                    {{ form.captcha }}
+                                </p>
+                            </div>
+                            <div class="col-lg-12 text-right">
+                                <p class="contact-one__field">
+                                    <button type="submit" class="btn btn-outline-secondary">{% trans 'Submit' %}</button>
+                                </p>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

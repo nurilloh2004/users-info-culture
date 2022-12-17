@@ -1,0 +1,366 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+
+{% block title %}{% trans 'Event list' %}{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'custom/plugins/pignose/css/pignose.calendar.min.css' %}">
+
+    <style>
+        .calendar {
+            margin: 10px 0;
+            background: none;
+        }
+        .exhibhition-one__title {
+            color: #0B5B80;
+        }
+
+        .exhibhition-one__single:hover .exhibhition-one__image {
+            -webkit-box-shadow: 0 0 10px 0 rgb(20 20 20 / 75%);
+            box-shadow: 0 0 10px 0 rgb(20 20 20 / 75%);
+        }
+        .exhibhition-one__single {
+            padding: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'custom/plugins/pignose/js/pignose.calendar.full.min.js' %}"></script>
+
+    <script>
+
+        (function() {
+
+            $('#event-carousel').owlCarousel({
+                loop: false,
+                margin: 6,
+                dots: false,
+                nav: false,
+                navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 2
+                    }
+                }
+            });
+
+            $('#exhibition-carousel').owlCarousel({
+                loop: false,
+                margin: 6,
+                dots: false,
+                nav: false,
+                navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 2
+                    }
+                }
+            });
+
+            const langs = {
+                "en": {
+                    weeks: [
+                        "Sun",
+                        "Mon",
+                        "Tue",
+                        "Wed",
+                        "Thr",
+                        "Fri",
+                        "Sat",
+                    ],
+                    monthsLong: [
+                        'January',
+                        'February',
+                        'March',
+                        'April',
+                        'May',
+                        'June',
+                        'July',
+                        'August',
+                        'September',
+                        'October',
+                        'November',
+                        'December',
+                    ],
+                    months: [
+                        'Jan',
+                        'Feb',
+                        'Mar',
+                        'Apr',
+                        'May',
+                        'Jun',
+                        'Jul',
+                        'Aug',
+                        'Sep',
+                        'Oct',
+                        'Nov',
+                        'Dec',
+                    ],
+                },
+                "ru": {
+                    weeks: [
+                        'Вс',
+                        'Пн',
+                        'Вт',
+                        'Ср',
+                        'Чт',
+                        'Пт',
+                        'Сб',
+                    ],
+                    monthsLong: [
+                        'Январь',
+                        'Февраль',
+                        'Март',
+                        'Апрель',
+                        'Май',
+                        'Июнь',
+                        'Июль',
+                        'Август',
+                        'Сентябрь',
+                        'Октябрь',
+                        'Ноябрь',
+                        'Декабрь',
+                    ],
+                    months: [
+                        'Янв',
+                        'Фев',
+                        'Мар',
+                        'Апр',
+                        'Май',
+                        'Июн',
+                        'Июл',
+                        'Авг',
+                        'Сен',
+                        'Окт',
+                        'Ноя',
+                        'Дек',
+                    ],
+                },
+                "uz": {
+                    weeks: [
+                        'Ya',
+                        'Du',
+                        'Se',
+                        'Ch',
+                        'Pa',
+                        'Ju',
+                        'Sh',
+                    ],
+                    monthsLong: [
+                        'Yanvar',
+                        'Fevral',
+                        'Mart',
+                        'Aprel',
+                        'May',
+                        'Iyun',
+                        'Iyul',
+                        'Avgust',
+                        'Sentabr',
+                        'Oktabr',
+                        'Noyabr',
+                        'Dekabr',
+                    ],
+                    months: [
+                        'Yan',
+                        'Fev',
+                        'Mar',
+                        'Apr',
+                        'May',
+                        'Iyn',
+                        'Iyl',
+                        'Avg',
+                        'Sen',
+                        'Okt',
+                        'Noy',
+                        'Dek',
+                    ],
+                },
+            }
+
+            {% if request.GET.date %}
+                let selectedCalendarDate = '{{ request.GET.date }}';
+            {% else %}
+                let selectedCalendarDate = '{% now 'Y/M/d' %}';
+            {% endif %}
+
+            $('#calendar').pignoseCalendar({
+
+                schedules: [
+                    {% for date in calendar_event.dates %}
+                        {
+                            name: 'offer',
+                            date: '{{ date }}'
+                        },
+                    {% endfor %}
+                ],
+                scheduleOptions: {
+                    colors: {
+                        offer: '#2fabb7',
+                        ad: '#5c6270'
+                    }
+                },
+
+                weeks: langs[page_lang].weeks,
+                months: langs[page_lang].months,
+                monthsLong: langs[page_lang].monthsLong,
+                controls: langs[page_lang].controls,
+                date: selectedCalendarDate,
+
+                minDate: moment().subtract(1, 'months').startOf('month').format("YYYY-MM-DD"),
+                maxDate: moment()     .add(1, 'months')  .endOf('month').format("YYYY-MM-DD"),
+                week: 1,
+                format: 'YYYY-MM-DD',
+
+                select: function(date, context) {
+                    selectedDate = date[0].format('YYYY-MM-DD')
+                    window.location = '{% url 'event_list' %}?date=' + selectedDate
+                }
+
+            });
+        })()
+
+    </script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+        <div class="row mb-3 text-center">
+
+            <div class="col-12">
+                <div class="title">
+                    <h2>{% trans 'Events' %}</h2>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-5 col-md-12 col-12">
+                <div class="calendar" id="calendar"></div>
+            </div>
+
+            <div class="col-lg-7 col-md-12 col-12">
+                <div class="event container-fluid mb-4">
+                    <div class="row">
+
+                        <div class="col-md-6 col-6 mb-3">
+                            <h4>{% trans 'Events' %}</h4>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        {% if calendar_event.event %}
+                            <div class="col-12">
+                                <div class="owl-carousel owl-theme" id="event-carousel">
+
+                                    {% for event in calendar_event.event %}
+                                        <div class="item">
+                                            <div class="exhibhition-one__single">
+                                                <div class="exhibhition-one__image">
+                                                    <div class="exhibhition-one__image-inner">
+                                                        <span class="exhibhition-one__image-border-1"></span>
+                                                        <span class="exhibhition-one__image-border-2"></span>
+                                                        <span class="exhibhition-one__image-border-3"></span>
+                                                        <span class="exhibhition-one__image-border-4"></span>
+                                                        <img src="{{ event.image.url }}" alt="{{ event.title }}"/>
+                                                        <a href="{{ event.get_absolute_url }}" class="exhibhition-one__image-link">
+                                                            <i class="egypt-icon-arrow-1"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="exhibhition-one__content mt-3">
+                                                    <h3 class="exhibhition-one__title">
+                                                        <a href="{{ event.get_absolute_url }}">
+                                                            {{ event.title }}
+                                                            ({{ event.start_date|date:"Y/m/d" }})
+                                                        </a>
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="col-12">
+                                <h4>{% trans 'No events found in selected date' %}</h4>
+                            </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+                <div class="exhibition container-fluid">
+                    <div class="row">
+                        <div class="col-6 col-md-6 mb-3">
+                            <h4>{% trans 'Exhibitions' %}</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        {% if calendar_event.exhibition %}
+                            <div class="col-12">
+                                <div class="owl-carousel owl-theme" id="exhibition-carousel">
+
+                                    {% for event in calendar_event.exhibition %}
+                                        <div class="item">
+                                            <div class="exhibhition-one__single">
+                                                <div class="exhibhition-one__image">
+                                                    <div class="exhibhition-one__image-inner">
+                                                        <span class="exhibhition-one__image-border-1"></span>
+                                                        <span class="exhibhition-one__image-border-2"></span>
+                                                        <span class="exhibhition-one__image-border-3"></span>
+                                                        <span class="exhibhition-one__image-border-4"></span>
+                                                        <img src="{{ event.image.url }}" alt="{{ event.title }}"/>
+                                                        <a href="{{ event.get_absolute_url }}" class="exhibhition-one__image-link">
+                                                            <i class="egypt-icon-arrow-1"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="exhibhition-one__content mt-3">
+                                                    <h3 class="exhibhition-one__title">
+                                                        <a href="{{ event.get_absolute_url }}">
+                                                            {{ event.title }}
+                                                            ({{ event.start_date|date:"Y/m/d" }})
+                                                        </a>
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="col-12">
+                                <h4>{% trans 'No exhibitions found in selected date' %}</h4>
+                            </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock content %}

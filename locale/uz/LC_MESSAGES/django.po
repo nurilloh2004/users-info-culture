@@ -1,0 +1,874 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-06 15:09+0500\n"
+"PO-Revision-Date: 2021-06-21 18:33+0437\n"
+"Last-Translator: b'  <>'\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Translated-Using: django-rosetta 0.9.6\n"
+
+#: main/admin.py:170
+msgid "Month"
+msgstr "Oy"
+
+#: main/models.py:185
+msgid "Site setting"
+msgstr "Sayt sozlamasi"
+
+#: main/models.py:466
+msgid "About page data"
+msgstr "Aloqa sahifasi ma'lumotlari"
+
+#: main/urls.py:7 main/urls.py:8
+msgid "Administration page of website madaniyat.uz"
+msgstr "madaniyat.uz sayti boshqaruv sahifasi"
+
+#: main/urls.py:9 templates/pages/home.html:5
+msgid "Home page"
+msgstr "Asosiy sahifa"
+
+#: main/utils.py:28
+msgid "Received application from https://madaniyat.uz website"
+msgstr "https://madaniyat.uz sahifasidan qabul qilngan ma'lumot"
+
+#: main/utils.py:39
+msgid "Received event ordering from https://madaniyat.uz website"
+msgstr "https://madaniyat.uz sahifasidan qabul qilngan ma'lumot"
+
+#: main/views.py:168
+msgid "Your application received successfully"
+msgstr "So'rovingiz qabul qilindi"
+
+#: main/views.py:241
+msgid "Invalid data sent"
+msgstr "Noto'g'ri ma'lumot jo'natilgan"
+
+#: main/views.py:251
+msgid "Your order received successfully"
+msgstr "So'rovingiz qabul qilindi"
+
+#: poll/models.py:24
+msgid "Poll"
+msgstr "So'rovnoma"
+
+#: poll/models.py:25
+#, fuzzy
+#| msgid "Poll"
+msgid "Polls"
+msgstr "So'rovnoma"
+
+#: poll/models.py:54
+msgid "Answer"
+msgstr "Javob"
+
+#: poll/models.py:55
+msgid "Answers"
+msgstr "Javoblar"
+
+#: poll/models.py:78 poll/templates/poll/poll.html:120
+msgid "Vote"
+msgstr "Ovoz berish"
+
+#: poll/models.py:79
+#, fuzzy
+#| msgid "Vote"
+msgid "Votes"
+msgstr "Ovoz berish"
+
+#: poll/templates/poll/result.html:24
+msgid "Total votes"
+msgstr "Barcha javoblar"
+
+#: templates/base.html:8 templates/parts/additional.html:13
+#: templates/parts/footer.html:59
+msgid "Ministry of Culture of the Republic of Uzbekistan"
+msgstr "O'zbekiston Respublikasi Madaniyat Vazirligi"
+
+#: templates/base.html:101
+#, fuzzy
+#| msgid "We successfully got your message!"
+msgid "We successfully get you message!"
+msgstr "Qabul qilindi"
+
+#: templates/base.html:102
+msgid "Oops! Something went wrong"
+msgstr "Keyinroq urinib ko'ring"
+
+#: templates/base.html:103
+msgid "Loading"
+msgstr "Yuklash"
+
+#: templates/base.html:104
+msgid "Info"
+msgstr "Ma'lumot"
+
+#: templates/base.html:105
+msgid "Please, choose an answer"
+msgstr "Iltimos, javob tanlang"
+
+#: templates/pages/album/list.html:5
+msgid "Albums"
+msgstr "Albomlar"
+
+#: templates/pages/album/list.html:39 templates/pages/home.html:1048
+msgid "Festivals and competitions"
+msgstr "Festivallar va musobaqalar"
+
+#: templates/pages/album/list.html:66
+msgid "No festivals found"
+msgstr "Festivallar topilmadi"
+
+#: templates/pages/application_form.html:5
+msgid "Application"
+msgstr "Forma"
+
+#: templates/pages/application_form.html:109
+msgid "Send your appeal"
+msgstr "So'rovingizni jo'nating"
+
+#: templates/pages/application_form.html:197
+msgid "Submit"
+msgstr "Jo'natish"
+
+#: templates/pages/contact.html:5 templates/pages/contact.html:68
+msgid "Contact us"
+msgstr "Biz bilan aloqa"
+
+#: templates/pages/contact.html:78 templates/pages/organization/detail.html:167
+#: templates/pages/person/detail.html:87 templates/pages/person/list.html:74
+msgid "Phone number"
+msgstr "Telefon raqami"
+
+#: templates/pages/contact.html:80 templates/pages/contact.html:90
+msgid "Call"
+msgstr "Qo'ng'iroq qilish"
+
+#: templates/pages/contact.html:88 templates/pages/statistics/list.html:109
+msgid "Helpline"
+msgstr "Ishonch telefoni"
+
+#: templates/pages/contact.html:98 templates/pages/person/detail.html:102
+#: templates/pages/person/list.html:79
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: templates/pages/contact.html:105
+msgid "Send mail"
+msgstr "E-Mail jo'natish"
+
+#: templates/pages/contact.html:114 templates/parts/additional.html:77
+msgid "Work time"
+msgstr "Ish vaqti"
+
+#: templates/pages/contact.html:123
+msgid "Application form"
+msgstr "Murojaat formasi"
+
+#: templates/pages/contact.html:125
+msgid "Open"
+msgstr "Ochish"
+
+#: templates/pages/contact.html:134 templates/pages/event/detail.html:197
+#: templates/pages/organization/detail.html:157
+msgid "Address"
+msgstr "Manzil"
+
+#: templates/pages/contact.html:136
+msgid "Buses"
+msgstr "Avtobuslar"
+
+#: templates/pages/event/detail.html:141
+msgid "About event"
+msgstr "Tadbir haqida"
+
+#: templates/pages/event/detail.html:144
+msgid "Contact"
+msgstr "Aloqa"
+
+#: templates/pages/event/detail.html:155
+msgid "Start time"
+msgstr "Boshlanish vaqti"
+
+#: templates/pages/event/detail.html:159
+msgid "Organizer"
+msgstr "Tashkilotchi"
+
+#: templates/pages/event/detail.html:163
+msgid "Ticket cost"
+msgstr "Narxi"
+
+#: templates/pages/event/detail.html:167
+msgid "Free"
+msgstr "Bepul"
+
+#: templates/pages/event/detail.html:169
+msgid "No information about price"
+msgstr "Narx haqida ma'lumot yo'q"
+
+#: templates/pages/event/detail.html:173
+msgid "Note"
+msgstr "Izoh"
+
+#: templates/pages/event/detail.html:201
+msgid "Event type"
+msgstr "Tadbir turi"
+
+#: templates/pages/event/detail.html:260
+msgid "Proceed to book"
+msgstr "Buyurtma qilish"
+
+#: templates/pages/event/list.html:5
+msgid "Event list"
+msgstr "Tadbirlar ro'yxati"
+
+#: templates/pages/event/list.html:247 templates/pages/event/list.html:264
+#: templates/pages/home.html:846
+msgid "Events"
+msgstr "Tadbirlar"
+
+#: templates/pages/event/list.html:305 templates/pages/home.html:693
+msgid "No events found in selected date"
+msgstr "Tanlangan sanada tadbirlar topilmadi"
+
+#: templates/pages/event/list.html:314
+msgid "Exhibitions"
+msgstr "Ko'rgazmalar"
+
+#: templates/pages/event/list.html:354 templates/pages/home.html:735
+msgid "No exhibitions found in selected date"
+msgstr "Tanlangan sanada ko'rgazmalar topilmadi"
+
+#: templates/pages/home.html:550 templates/pages/post/detail.html:202
+msgid "Read more"
+msgstr "Batafsil"
+
+#: templates/pages/home.html:560
+msgid "Previous"
+msgstr "Oldingi"
+
+#: templates/pages/home.html:564
+msgid "Next"
+msgstr "Keyingi"
+
+#: templates/pages/home.html:572
+msgid "News"
+msgstr "Yangiliklar"
+
+#: templates/pages/home.html:602 templates/pages/media/list.html:85
+#: templates/pages/organization/list.html:163 templates/pages/post/list.html:94
+msgid "Read More"
+msgstr "Batafsil"
+
+#: templates/pages/home.html:613
+msgid "More news"
+msgstr "Ko'proq yangiliklar"
+
+#: templates/pages/home.html:622 templates/pages/home.html:1015
+msgid "Key indicators"
+msgstr "Murojaatlar statistikasi"
+
+#: templates/pages/home.html:648
+msgid "Events calendar"
+msgstr "Tadbirlar kalendari"
+
+#: templates/pages/home.html:660
+msgid "Event"
+msgstr "Tadbir"
+
+#: templates/pages/home.html:663 templates/pages/home.html:705
+#: templates/pages/organization/list.html:116
+#: templates/pages/statistics/list.html:111
+msgid "All"
+msgstr "Barchasi"
+
+#: templates/pages/home.html:702
+msgid "Exhibition"
+msgstr "Ko'rgazma"
+
+#: templates/pages/home.html:756
+msgid "Polls, media and useful links"
+msgstr "So'rov, media va foydali havolalar"
+
+#: templates/pages/home.html:758
+msgid "Media and useful links"
+msgstr "Media va foydali havolalar"
+
+#: templates/pages/home.html:816
+msgid "Foydali havolalar"
+msgstr ""
+
+#: templates/pages/home.html:852
+msgid "Current"
+msgstr "Joriy"
+
+#: templates/pages/home.html:859
+msgid "Upcoming"
+msgstr "Kelayotgan"
+
+#: templates/pages/home.html:866
+msgid "Past"
+msgstr "Otib ketgan"
+
+#: templates/pages/home.html:871
+msgid "All upcoming events"
+msgstr "Barcha yaqinlashayotgan tadbirlar"
+
+#: templates/pages/home.html:888 templates/pages/home.html:930
+#: templates/pages/home.html:972
+msgid "No information"
+msgstr "Ma'lumot yo'q"
+
+#: templates/pages/home.html:909 templates/pages/home.html:951
+#: templates/pages/home.html:993
+msgid "About"
+msgstr "Batafsil"
+
+#: templates/pages/home.html:914 templates/pages/home.html:956
+#: templates/pages/home.html:998
+msgid "Events not found"
+msgstr "Tadbirlar topilmadi"
+
+#: templates/pages/home.html:1022
+msgid "Accepted"
+msgstr "Qabul qilindi"
+
+#: templates/pages/home.html:1027 templates/pages/statistics/list.html:116
+msgid "On process"
+msgstr "Jarayonda"
+
+#: templates/pages/home.html:1032
+msgid "Solved"
+msgstr "Hal qilindi"
+
+#: templates/pages/home.html:1037
+msgid "Non acceptable"
+msgstr "Rad etilgan"
+
+#: templates/pages/home.html:1068
+msgid "View all festivals"
+msgstr "Barcha festivallar"
+
+#: templates/pages/media/detail.html:186
+msgid "No data about audio"
+msgstr "Audio haqida ma'lumot yo'q"
+
+#: templates/pages/media/index.html:4 templates/pages/media/list.html:39
+msgid "Media"
+msgstr "Media"
+
+#: templates/pages/media/index.html:37
+msgid "Video gallery"
+msgstr "Video gallereya"
+
+#: templates/pages/media/index.html:46
+msgid "Audio gallery"
+msgstr "Audio gallereya"
+
+#: templates/pages/media/index.html:55
+msgid "Photo gallery"
+msgstr "Photo gallereya"
+
+#: templates/pages/media/list.html:5
+msgid "Media list"
+msgstr "Media ro'yxati"
+
+#: templates/pages/media/list.html:100
+msgid "No media found"
+msgstr "Media topilmadi"
+
+#: templates/pages/not_found.html:5 templates/pages/not_found.html:352
+msgid "Page not found"
+msgstr "Sahifa topilmadi"
+
+#: templates/pages/not_found.html:353
+msgid "Go to home page"
+msgstr "Asosiy sahifaga qaytish"
+
+#: templates/pages/organization/detail.html:153
+msgid "Head of office"
+msgstr "Tashkilot rahbari"
+
+#: templates/pages/organization/detail.html:162
+msgid "Category"
+msgstr "Kategoriya"
+
+#: templates/pages/organization/detail.html:171
+msgid "Website"
+msgstr "Web-sayt"
+
+#: templates/pages/organization/list.html:5
+#: templates/pages/organization/list.html:105
+msgid "Organizations"
+msgstr "Tashkilotlar"
+
+#: templates/pages/organization/list.html:174
+msgid "No organizations found"
+msgstr "Tashkilotlar topilmadi"
+
+#: templates/pages/person/detail.html:79 templates/pages/person/list.html:69
+msgid "Admission days"
+msgstr "Qabul kunlari"
+
+#: templates/pages/person/detail.html:117
+msgid "Make an appointment"
+msgstr "Qabulga yozilish"
+
+#: templates/pages/person/detail.html:132
+#: templates/pages/person/detail.html:179
+msgid "Description"
+msgstr "Izoh"
+
+#: templates/pages/person/detail.html:142
+msgid "Professional history"
+msgstr "Kasbiy tarix"
+
+#: templates/pages/person/detail.html:166 templates/pages/person/list.html:43
+msgid "Vacant"
+msgstr "Vakant"
+
+#: templates/pages/person/list.html:5 templates/pages/person/list.html:22
+msgid "Administration"
+msgstr "Ma'muriyat"
+
+#: templates/pages/person/list.html:20
+msgid "Central office"
+msgstr "Markaziy apparat"
+
+#: templates/pages/post/detail.html:163
+msgid "Attachments"
+msgstr "Fayllar"
+
+#: templates/pages/post/detail.html:181
+msgid "Other posts"
+msgstr "Boshqa postlar"
+
+#: templates/pages/post/detail.html:210
+msgid "No other posts found"
+msgstr "Boshqa postlar topilmadi"
+
+#: templates/pages/post/list.html:5 templates/pages/post/list.html:58
+msgid "Posts"
+msgstr "Postlar"
+
+#: templates/pages/post/list.html:108
+msgid "No posts found"
+msgstr "Postlar topilmadi"
+
+#: templates/pages/region/region.html:5
+msgid "Regional offices"
+msgstr "Viloyat boshqarmalari"
+
+#: templates/pages/region/region.html:103
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organizations map"
+msgstr "Tashkilotlar"
+
+#: templates/pages/search.html:5 templates/pages/search.html:19
+msgid "Search results"
+msgstr "Qidiruv natijalari"
+
+#: templates/pages/search.html:41
+#, fuzzy
+#| msgid "No posts found"
+msgid "No items found"
+msgstr "Postlar topilmadi"
+
+#: templates/pages/statistics/list.html:5
+#: templates/pages/statistics/list.html:66
+msgid "Application statistics"
+msgstr "Murojaatlar statistikasi"
+
+#: templates/pages/statistics/list.html:76
+#: templates/pages/statistics/list.html:79
+msgid "Start date"
+msgstr "Boshlanish vaqti"
+
+#: templates/pages/statistics/list.html:84
+#: templates/pages/statistics/list.html:87
+msgid "End date"
+msgstr "Tugash vaqti"
+
+#: templates/pages/statistics/list.html:107
+msgid "Written"
+msgstr "Yozma"
+
+#: templates/pages/statistics/list.html:108
+msgid "Oral appeals"
+msgstr "Og'zaki"
+
+#: templates/pages/statistics/list.html:110
+msgid "Online application"
+msgstr "Onlayn"
+
+#: templates/pages/statistics/list.html:124
+msgid "Resolved"
+msgstr "Hal qilindi"
+
+#: templates/pages/statistics/list.html:132
+msgid "Rejected"
+msgstr "Rad etildi"
+
+# #: templates/pages/statistics/list.html:105
+# msgid "Written"
+# msgstr "Yozma"
+# #: templates/pages/statistics/list.html:106
+# msgid "Oral appeals"
+# msgstr "Og'zaki"
+# #: templates/pages/statistics/list.html:108
+# msgid "Online application"
+# msgstr "Onlayn"
+# #: templates/pages/statistics/list.html:114
+# msgid "Received"
+# msgstr "Qabul qilingan"
+# #: templates/pages/statistics/list.html:130
+# msgid "Successfull"
+# msgstr "Hal etilgan"
+# #: templates/pages/statistics/list.html:138
+# msgid "Invalid"
+# msgstr "Qabul qilinmagan"
+#: templates/parts/additional.html:11 templates/parts/header.html:44
+msgid "Logo of Ministry of Culture of the Republic Uzbekistan"
+msgstr "O'zbekiston Respublikasi Madaniyat Vazirligi logotipi"
+
+#: templates/parts/additional.html:14 templates/parts/header.html:47
+msgid "Official website"
+msgstr "Rasmiy sahifa"
+
+#: templates/parts/additional.html:63
+msgid "Contact Us"
+msgstr "Biz bilan aloqa"
+
+#: templates/parts/additional.html:92
+msgid "Type here to search..."
+msgstr "Qidirish ..."
+
+#: templates/parts/additional.html:104
+msgid "Increase font size"
+msgstr "Kattaroq yozuv"
+
+#: templates/parts/additional.html:108
+msgid "Default font size"
+msgstr "Standart yozuv"
+
+#: templates/parts/additional.html:112
+msgid "Decrease font size"
+msgstr "Kichik yozuv"
+
+#: templates/parts/additional.html:116
+msgid "Sound assistance"
+msgstr "Ovozli yordamchi"
+
+#: templates/parts/additional.html:120
+msgid "Greyscale mode"
+msgstr "Oq-qora rejim"
+
+#: templates/parts/additional.html:128
+msgid "Describe found typo"
+msgstr "Topilgan xatoni izohlash"
+
+#: templates/parts/additional.html:136
+msgid "Description (not required)"
+msgstr "Izoh (to'ldirish shart emas)"
+
+#: templates/parts/additional.html:140
+msgid "Send"
+msgstr "Jo'natish"
+
+#: templates/parts/footer.html:11
+msgid "Get connected with us on social networks!"
+msgstr "Biz bilan ijtimoiy tarmoqlarda bo'ling"
+
+#: templates/parts/footer.html:67
+msgid "Our address"
+msgstr "Bizning manzil"
+
+#: templates/parts/footer.html:76
+msgid "Phone number and fax"
+msgstr "Telefon raqami"
+
+#: templates/parts/footer.html:94
+msgid "Visitor statistics"
+msgstr "Tashrif buyuruvchilar statistikasi"
+
+#: templates/parts/footer.html:140
+msgid "Found typo? Select it and press CTRL+Enter"
+msgstr "Matndagi xatoni belgilang va CTRL+ENTER tugmalarini bosing"
+
+#: templates/parts/footer.html:148
+msgid "Site was created by"
+msgstr "Sayt yaratuvchisi"
+
+#: templates/parts/header.html:46
+msgid "Ministry of Culture of the Republic<br>of Uzbekistan"
+msgstr "O'zbekiston Respublikasi<br>Madaniyat vazirligi"
+
+#~ msgid "Andijan"
+#~ msgstr "Andijon"
+
+#~ msgid "Bukhara"
+#~ msgstr "Buxoro"
+
+#~ msgid "Fergana"
+#~ msgstr "Farg'ona"
+
+#~ msgid "Jizzakh"
+#~ msgstr "Jizzax"
+
+#~ msgid "Karakalpakstan"
+#~ msgstr "Qoraqalpog'iston"
+
+#~ msgid "Kashkadarya"
+#~ msgstr "Qashqadaryo"
+
+#~ msgid "Khorezm"
+#~ msgstr "Xorazm"
+
+#~ msgid "Namangan"
+#~ msgstr "Namangan"
+
+#~ msgid "Navoi"
+#~ msgstr "Navoi"
+
+#~ msgid "Samarkand"
+#~ msgstr "Samarqand"
+
+#~ msgid "Surkhandarya"
+#~ msgstr "Surxondaryo"
+
+#~ msgid "Syrdarya"
+#~ msgstr "Sirdaryo"
+
+#~ msgid "Tashkent city"
+#~ msgstr "Toshkent sh."
+
+#~ msgid "Tashkent region"
+#~ msgstr "Toshkent"
+
+#~ msgid "Banner"
+#~ msgstr "Banner"
+
+#~ msgid "Banners"
+#~ msgstr "Bannerlar"
+
+#~ msgid "Menu item"
+#~ msgstr "Menyu punkti"
+
+#~ msgid "Menu items"
+#~ msgstr "Menyu punktlari"
+
+#~ msgid "Event order"
+#~ msgstr "Tadbirga buyurtma"
+
+#~ msgid "Event orders"
+#~ msgstr "Tadbir buyurtmalari"
+
+#~ msgid "Site settings"
+#~ msgstr "Sayt sozlamalari"
+
+#~ msgid "Person"
+#~ msgstr "Xodim"
+
+#~ msgid "Persons"
+#~ msgstr "Xodimlar"
+
+#~ msgid "Required to fill field"
+#~ msgstr "To'ldirilishi kerak"
+
+#~ msgid "Static page"
+#~ msgstr "Statik sahifa"
+
+#~ msgid "Static pages"
+#~ msgstr "Statik sahifalar"
+
+#~ msgid "Even one of title or content should have a value."
+#~ msgstr "'Sarlavha' yoki 'Mazmun' maydonlaridan biri to'ldirilishi shart"
+
+#~ msgid "Post category"
+#~ msgstr "Post kategoriyasi"
+
+#~ msgid "Post categories"
+#~ msgstr "Post kategoriyalari"
+
+#~ msgid "Post"
+#~ msgstr "Post"
+
+#~ msgid "Post image"
+#~ msgstr "Post rasmi"
+
+#~ msgid "Post images"
+#~ msgstr "Post rasmlari"
+
+#~ msgid "Post file"
+#~ msgstr "Post fayli"
+
+#~ msgid "Post files"
+#~ msgstr "Post fayllari"
+
+#~ msgid "Organization category"
+#~ msgstr "Tashkilot turi"
+
+#~ msgid "Organization categories"
+#~ msgstr "Tashkilot turlari"
+
+#~ msgid "Organization"
+#~ msgstr "Tashkilot"
+
+#~ msgid "Regional office"
+#~ msgstr "Viloyat boshqarmasi"
+
+#~ msgid "Reviewing"
+#~ msgstr "Ko'rib chiqilmoqda"
+
+#~ msgid "Resolving"
+#~ msgstr "Xal etildi"
+
+#~ msgid "Applications"
+#~ msgstr "Formalar"
+
+#~ msgid "Video"
+#~ msgstr "Video"
+
+#~ msgid "Audio"
+#~ msgstr "Audio"
+
+#~ msgid "Photo"
+#~ msgstr "Foto"
+
+#~ msgid "Medias"
+#~ msgstr "Medialar"
+
+#~ msgid "Media object"
+#~ msgstr "Media obyekti"
+
+#~ msgid "Media objects"
+#~ msgstr "Media obyektlari"
+
+#~ msgid "One of these field need to be filled"
+#~ msgstr "Ushbu maydonlardan biri to'ldirilishi shart"
+
+#~ msgid "Image field must be filled"
+#~ msgstr "Rasmni to'ldirish shart"
+
+#~ msgid "Statistical data"
+#~ msgstr "Statistik ma'lumot"
+
+#~ msgid "Statistical datas"
+#~ msgstr "Statistik ma'lumotlar"
+
+#~ msgid "Typo"
+#~ msgstr "Imloviy xato"
+
+#~ msgid "Typos"
+#~ msgstr "Imloviy xatolar"
+
+#~ msgid "Public transports"
+#~ msgstr "Ommaviy transport"
+
+#~ msgid "About us"
+#~ msgstr "Biz haqimizda"
+
+#~ msgid ""
+#~ "The Ministry of Culture of the Republic of Uzbekistan is a public "
+#~ "administration body in the field of culture and reports to the Cabinet of "
+#~ "Ministers of the Republic of Uzbekistan"
+#~ msgstr ""
+#~ "O'zbekiston Respublikasi Madaniyat vazirligi madaniyat sohasidagi davlat "
+#~ "boshqaruv organi bo'lib, O'zbekiston Respublikasi Vazirlar Mahkamasiga "
+#~ "hisobot beradi."
+
+#~ msgid ""
+#~ "The Ministry cooperates with other public administration bodies, local "
+#~ "state authorities and other organizations in the implementation of its "
+#~ "tasks and functions."
+#~ msgstr ""
+#~ "Vazirlik o'z vazifalari va funksiyalarini amalga oshirishda boshqa davlat "
+#~ "boshqaruvi organlari, mahalliy davlat hokimiyati organlari va boshqa "
+#~ "tashkilotlar bilan hamkorlik qiladi."
+
+#~ msgid "Image of building of Ministry of culture"
+#~ msgstr "Madaniyat Vazirligi binosi rasmi"
+
+#~ msgid "Image of building of Museum of history of Uzbekistan"
+#~ msgstr "O'zbekiston tarixi muzeyi binosi tasviri"
+
+#~ msgid "Upcoming events"
+#~ msgstr "Yaqinlashayotgan tadbirlar"
+
+#~ msgid "No exhibition found in selected date"
+#~ msgstr "Tanlangan sanada ko'rgazma topilmadi"
+
+#~ msgid "Not solved"
+#~ msgstr "Hal qilinmadi"
+
+#~ msgid "File #"
+#~ msgstr "Fayl"
+
+#~ msgid "Statistics"
+#~ msgstr "Statistika"
+
+#~ msgid "Received"
+#~ msgstr "Qabul qilingan"
+
+#~ msgid "Successfull"
+#~ msgstr "Hal etilgan"
+
+#~ msgid "Invalid"
+#~ msgstr "Qabul qilinmagan"
+
+#~ msgid ""
+#~ "Icons can be found from <a href='https://fontawesome.com/v5.15/"
+#~ "icons'>here</a>"
+#~ msgstr ""
+#~ "Ikonlarni <a href='https://fontawesome.com/v5.15/icons'>shu yerdan</a> "
+#~ "topishingiz mumkin."
+
+#~ msgid "Polls and useful links"
+#~ msgstr "So'rov va foydali havolalar"
+
+#~ msgid "Useful link"
+#~ msgstr "Foydali havola"
+
+#~ msgid "Useful links"
+#~ msgstr "Foydali havolalar"
+
+#~ msgid "Organization region"
+#~ msgstr "Tashkilot tumani"
+
+#~ msgid "Organization regions"
+#~ msgstr "Tashkilot tumanlari"
+
+#~ msgid "Festival"
+#~ msgstr "Festival"
+
+#~ msgid "Competition"
+#~ msgstr "Tanlov"
+
+#~ msgid "Local"
+#~ msgstr "Mahalliy"
+
+#~ msgid "International"
+#~ msgstr "Xalqaro"
+
+#~ msgid "Region"
+#~ msgstr "Viloyat"
+
+#~ msgid "Full name"
+#~ msgstr "To'liq ismingiz"
+
+#~ msgid "File"
+#~ msgstr "Fayl"
+
+#~ msgid "Application content"
+#~ msgstr "Murojaat mazmuni"

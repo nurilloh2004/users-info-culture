@@ -1,0 +1,25 @@
+{% load app_tags %}
+
+{% if page_obj.has_other_pages %}
+    <div class="post-pagination post-pagination__two">
+        {% if page_obj.has_previous %}
+            <a href="{% replace_url_param page=page_obj.previous_page_number %}">
+                <i class="fal fa-angle-double-left"></i>
+            </a>
+        {% endif %}
+
+        {% for i in page_obj.paginator.page_range %}
+            {% if page_obj.number == i %}
+                <a href="{% replace_url_param page=i %}" class="active">{{ i }}</a>
+            {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %}
+                <a href="{% replace_url_param page=i %}">{{ i }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a href="{% replace_url_param page=page_obj.next_page_number %}">
+                <i class="fal fa-angle-double-right"></i>
+            </a>
+        {% endif %}
+    </div>
+{% endif %}

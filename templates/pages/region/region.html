@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+
+{% block title %}{% trans 'Regional offices' %}{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'custom/plugins/leaflet_map/leaflet/leaflet.css' %}" />
+
+    <style>
+        .cluster-div {
+            background: red;
+            line-height: 1;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            vertical-align: middle;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            border-radius: 50%;
+        }
+
+        .leaflet-div-icon {
+            background: transparent;
+            border: none;
+        }
+
+        .leaflet-popup-content p {
+            margin: 6px 0;
+        }
+
+        #map {
+            height: 600px;
+        }
+    </style>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'custom/plugins/leaflet_map/leaflet/leaflet.js' %}"></script>
+    <script src="{% static 'custom/plugins/leaflet_map/marker_cluster/leaflet.markercluster.js' %}"></script>
+
+    <script>
+
+        function createMapCluster() {
+            let markers = L.markerClusterGroup({
+                iconCreateFunction: function(cluster) {
+                    return L.divIcon({ html: '<div class="cluster-div">' + cluster.getChildCount() + '</div>' });
+                }
+            });
+
+            let marker = null;
+            {% for region in organizations %}
+            {% for organization in region.organizations %}
+            marker = L.marker([{{ organization.location.latitude }}, {{ organization.location.longitude }},]);
+            marker.bindPopup(
+                "<div>" +
+                    "<img src='{{ organization.main_image.url }}' class='img-fluid' />" +
+                    "<h6 class='text-center mt-2'>" +
+                        "<a href='{{ organization.get_absolute_url }}' class='popup-details'>" +
+                            "<span style='color: var(--main-color); font-weight: bold;'>{{ organization.title }}</span>" +
+                            "<i class='ml-1 fas fa-external-link-square-alt' style='color: var(--second-color);'></i>" +
+                        "</a>" +
+                    "</h6>" +
+                    "<p><i class='fa fa-tag mr-2'></i>{{ organization.organization_category }}</p>" +
+                    "<p><i class='fas fa-location mr-2'></i>{{ organization.address }}</p>" +
+                    "<div class='d-flex justify-content-around'>" +
+                        "<p class='mx-2'><i class='fa fa-phone mr-2'></i><a href='{{ organization.tel }}'>{{ organization.tel }}</a></p>" +
+                        "<p class='mx-2'><i class='fa fa-globe mr-2'></i><a href='{{ organization.website }}'>{{ organization.website }}</a></p>" +
+                    "</div>" +
+                "</div>"
+            ).openPopup();
+            markers.addLayer(marker);
+            {% endfor %}
+            {% endfor %}
+
+            return markers;
+        }
+
+        (function () {
+
+            // Create map
+            var map = L.map('map').setView([41.3775, 64.5853], 6);
+
+            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                attribution: '',
+            }).addTo(map);
+
+            // Create marker cluster
+            let cluster = createMapCluster();
+            map.addLayer(cluster);
+
+        })();
+
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="row mb-4 title text-center d-block">
+            <h2>{% trans 'Organizations map' %}</h2>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

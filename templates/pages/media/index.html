@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans 'Media' %}{% endblock %}
+
+{% block css %}
+    <style>
+        .content-type {
+            box-shadow: 0 0 12px #6c757d26;
+            transition: all .4s;
+            border-radius: 15px;
+        }
+        .content-type:hover {
+            transform: scale(1.03);
+        }
+        .content-type .content-type-icon {
+            font-size: 3em;
+            min-width: 52px;
+            min-height: 52px;
+            color: var(--main-color);
+        }
+
+        .content-type .content-type-title {
+            color: var(--second-color);
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-4 py-3">
+                <div class="content-type p-4">
+                    <a href="{% url 'media_gallery_list' %}?category=video">
+                        <div class="text-center content-type-icon"><i class="fa fa-video"></i></div>
+                        <div class="text-center content-type-title mt-2"><h3>{% trans 'Video gallery' %}</h3></div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-4 py-3">
+                <div class="content-type p-4">
+                    <a href="{% url 'media_gallery_list' %}?category=audio">
+                        <div class="text-center content-type-icon"><i class="fa fa-file-audio"></i></div>
+                        <div class="text-center content-type-title mt-2"><h3>{% trans 'Audio gallery' %}</h3></div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-4 py-3">
+                <div class="content-type p-4">
+                    <a href="{% url 'media_gallery_list' %}?category=photo">
+                        <div class="text-center content-type-icon"><i class="fa fa-photo"></i></div>
+                        <div class="text-center content-type-title mt-2"><h3>{% trans 'Photo gallery' %}</h3></div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

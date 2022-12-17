@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'custom/plugins/jquery.fancybox/jquery.fancybox.min.css' %}">
+    <link rel="stylesheet" href="{% static 'custom/plugins/aos/aos.css' %}">
+
+    <style>
+        .owl-item-img {
+            display: block;
+            width: 100%;
+            object-fit: cover;
+            height: 100%;
+            border: 1px solid #fc9a06;
+            border-radius: 5px;
+        }
+
+        .posts .post-detail__images a {
+            width: 100%;
+            height: 150px;
+            display: block;
+            padding: 14px;
+        }
+
+        .owl-theme .owl-nav [class*=owl-] {
+            transition: all .4s;
+            color: #0B5B80 !important;
+        }
+
+        .owl-theme .owl-nav [class*=owl-]:hover {
+            background-color: unset;
+            color: #fc9a06 !important;
+            text-decoration: none;
+        }
+
+        .owl-theme .owl-nav button {
+            outline: none;
+        }
+
+        .posts .post-detail__subheader {
+            align-items: center;
+        }
+
+        .posts .post-detail__print {
+            padding: 4px 12px;
+        }
+
+        .owl-carousel {
+            background-color: rgb(0, 16, 44);
+            border-radius: 5px;
+        }
+
+        .post-detail__img img {
+            border-radius: 4px;
+            -webkit-box-shadow: 0 5px 10px 0 rgba(25, 45, 51, .15);
+            -moz-box-shadow: 0 5px 10px 0 rgba(25, 45, 51, .15);
+            box-shadow: 0 5px 10px 0 rgba(25, 45, 51, .15);
+        }
+    </style>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'custom/plugins/jquery.fancybox/jquery.fancybox.min.js' %}"></script>
+    <script src="{% static 'custom/plugins/aos/aos.js' %}"></script>
+    <script>
+
+        AOS.init();
+
+        $('#print-page').on('click', function(e) {
+            e.preventDefault();
+            window.print()
+        })
+
+        $('.post-detail').owlCarousel({
+            loop: false,
+            margin: 18,
+            dots: false,
+            nav: false,
+            navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 4
+                }
+            }
+        })
+
+        $('.post-detail__body img').wrap(function () {
+            return "<a href='" + this.attributes['src'].value + "' data-fancybox='gallery-3'></a>";
+        });
+
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="page-content posts">
+        <div class="container">
+            <div class="row">
+               
+
+                <div class="col-lg-9 col-md-12">
+                    <div class="post-detail__header">
+                        <h2 class="post-detail__title">{{ post.title }}</h2>
+                    </div>
+
+                    <div class="post-detail__subheader mb-3">
+                        <div id="print-page" class='post-detail__print'>
+                            <i class="fa fa-print" aria-hidden="true"></i>
+                        </div>
+                        <div class="post-detail__date d-flex flex-row">
+                            <h6 class="post-detail__date">
+                                <i class="fa fa-calendar mr-2" aria-hidden="true"></i>
+                                <span>{{ post.posting_date|date:"d M, Y - H:i" }}</span>
+                            </h6>
+                            <h6 class="post-detail__date"><i class="fa fa-eye ml-3"></i> {{ post.view_count }}</h6>
+                        </div>
+                    </div>
+
+                    <div class="post-detail__img">
+                        <a data-fancybox="gallery-1" href="{{ post.image.url }}">
+                            <img src="{{ post.image.url }}" alt="{{ post.title }}"/>
+                        </a>
+                    </div>
+
+                    <div class="post-detail__descr py-2 pb-0">
+                        <h4>{{ post.short_description }}</h4>
+                    </div>
+
+                    <div class="owl-carousel owl-theme post-detail">
+
+                        {% for image in post.postimage_set.all %}
+                            <div class="item">
+                                <div class="post-detail__images">
+
+                                    <a data-fancybox="gallery"
+                                       href="{{ image.image.url }}">
+                                        <img src="{{ image.image.url }}" alt="{{ image.title }}" class="owl-item-img">
+                                    </a>
+
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="post-detail__body mt-4">
+                        {{ post.body|safe }}
+                    </div>
+
+                    {% if post.postfile_set.count %}
+                        <div class="post-attachments">
+
+                            <hr />
+
+                            <h4>{% trans 'Attachments' %}: </h4>
+
+                            <ul class="list-unstyled">
+                                {% for file in post.postfile_set.all %}
+                                    <li><a download href="{{ file.file.url }}">{{ file.title }}</a></li>
+                                    {% comment %}<li><a download href="{{ file.file.url }}">{% trans 'File #' %} {{ forloop.counter }}</a></li>{% endcomment %}
+                                {% endfor %}
+                            </ul>
+
+                        </div>
+                    {% endif %}
+
+                </div>
+                <div class="col-lg-3 col-md-12">
+                    <div class="other-posts-block">
+
+                        <div class="title">
+                            <h3>{% trans 'Other posts' %}</h3>
+                        </div>
+
+                        <div class="mt-3 other-posts-content">
+
+                            {% for post in other_posts %}
+
+                                <div class="item sidebar-item mb-3" data-aos="fade-down">
+                                    <div class="sidebar__post-single">
+                                        <div class="sidebar__post-image">
+                                            <div class="sidebar__post-date">
+                                                <span>{{ post.posting_date|date:"d" }}</span>
+                                                {{ post.posting_date|date:"M" }}
+                                            </div>
+                                            <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                                        </div>
+                                        <div class="sidebar__post-content">
+                                            <h3 class="sidebar__post-title">
+                                                <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                                            </h3>
+                                            <a href="{{ post.get_absolute_url }}" class="sidebar__post-link">
+                                                {% trans 'Read more' %}
+                                                <span>+</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% empty %}
+                                <h5>{% trans 'No other posts found' %}</h5>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+
+{% block title %}{% trans 'Application statistics' %}{% endblock %}
+
+{% block css %}
+    <style>
+        table {
+            width: 100%;
+            border-radius: 4px;
+        }
+
+        table tr th {
+            border: 1px solid #0B5B80;
+        }
+
+        table thead tr th {
+            padding: 10px 20px;
+            background-color: #0B5B80;
+            color: white;
+            border: 1px solid white;
+            text-align: center;
+        }
+
+        table thead tr th:first-child {
+            text-align: unset;
+        }
+
+        table tbody tr:nth-child(odd) {
+            background-color: gainsboro;
+        }
+
+        table tbody tr th {
+            padding: 10px 15px;
+            text-align: center;
+            color: #000;
+        }
+
+        table tbody tr th:first-child {
+            text-align: unset;
+        }
+
+        .form-inline {
+            justify-content: flex-end;
+        }
+
+        @media (max-width: 768px) {
+
+            .form-inline {
+                flex-flow: column wrap;
+                justify-content: unset;
+                align-items: baseline;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+        <div class="row text-center">
+            <div class="col-12">
+                <div class="title">
+                    <h3>{% trans 'Application statistics' %}</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row py-3 align-items-center">
+            <div class="col-lg-1  col-12"></div>
+            <form id="form" name="form" class="form-inline col-lg-11 col-12">
+                <div class="form-group">
+                    {% if need_to_fill_both_dates %}
+                        <label class="mr-2" for="start_date">{% trans 'Start date' %}: </label>
+                        <input required id="start_date" name="start_date" type="month" class="form-control mr-1" />
+                    {% else %}
+                        <label class="mr-2" for="start_date">{% trans 'Start date' %}: </label>
+                        <input required id="start_date" name="start_date" type="month" class="form-control mr-1" {% if request.GET.start_date %}value="{{ request.GET.start_date }}{% endif %}" />
+                    {% endif %}
+                    &nbsp;
+                    {% if need_to_fill_both_dates %}
+                        <label class="mr-2" for="end_date">{% trans 'End date' %}: </label>
+                        <input required id="end_date" name="end_date" type="month" class="form-control" />
+                    {% else %}
+                        <label class="mr-2" for="end_date">{% trans 'End date' %}: </label>
+                        <input required id="end_date" name="end_date" type="month" class="form-control" {% if request.GET.end_date %}value="{{ request.GET.end_date }}{% endif %}" />
+                    {% endif %}
+                </div>
+                <div class="form-group ml-3">
+                    <button type="submit" class="btn btn-outline-info"><i class="fa fa-search"></i></button>
+                    <a href="{% url 'statistics_template' %}" class="btn btn-outline-info ml-2"><i class="fa fa-times"></i></a>
+                </div>
+            </form>
+        </div>
+
+        <div class="row">
+            <div class="col-8 offset-2">
+                <div>
+
+                    <div class="table-responsive mt-3">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>{% trans 'Written' %}</th>
+                                    <th>{% trans 'Oral appeals' %}</th>
+                                    <th>{% trans 'Helpline' %}</th>
+                                    <th>{% trans 'Online application' %}</th>
+                                    <th>{% trans 'All' %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>{% trans 'On process' %}</th>
+                                    <th>{{ data.written.received_and_on_process }}</th>
+                                    <th>{{ data.oral.received_and_on_process }}</th>
+                                    <th>{{ data.helpline.received_and_on_process }}</th>
+                                    <th>{{ data.online.received_and_on_process }}</th>
+                                    <th>{{ data.all_x.all_received_and_on_process }}</th>
+                                </tr>
+                                <tr>
+                                    <th>{% trans 'Resolved' %}</th>
+                                    <th>{{ data.written.completed }}</th>
+                                    <th>{{ data.oral.completed }}</th>
+                                    <th>{{ data.helpline.completed }}</th>
+                                    <th>{{ data.online.completed }}</th>
+                                    <th>{{ data.all_x.all_completed }}</th>
+                                </tr>
+                                <tr>
+                                    <th>{% trans 'Rejected' %}</th>
+                                    <th>{{ data.written.invalid }}</th>
+                                    <th>{{ data.oral.invalid }}</th>
+                                    <th>{{ data.helpline.invalid }}</th>
+                                    <th>{{ data.online.invalid }}</th>
+                                    <th>{{ data.all_x.all_invalid }}</th>
+                                </tr>
+{#                                <tr>#}
+{#                                    <th>{% trans 'All' %}</th>#}
+{#                                    <th>{{ data.all_y.written }}</th>#}
+{#                                    <th>{{ data.all_y.oral }}</th>#}
+{#                                    <th>{{ data.all_y.helpline }}</th>#}
+{#                                    <th>{{ data.all_y.online }}</th>#}
+{#                                </tr>#}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

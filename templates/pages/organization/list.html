@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+
+{% block title %}{% trans 'Organizations' %}{% endblock %}
+
+{% block css %}
+    <style>
+        .blog-grid {
+            padding: 0 0;
+        }
+
+        .exhibhition-one__bottom-left > span:before {
+            display: none;
+            content: none;
+        }
+
+        .page-title {
+            border-bottom: 2px solid #0B5B80;
+            display: inline-block;
+            color: #fc9a06;
+            padding: 10px 20px;
+            font-size: 3.1em;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+        }
+
+        .exhibhition-one__bottom-left span:nth-child(2) {
+            margin-top: 3px;
+        }
+
+        .exhibhition-one__bottom-left {
+            flex-direction: row;
+        }
+
+        .page-wrapper {
+            overflow: auto;
+        }
+
+        @media (max-width: 1200px) {
+            .exhibhition-one__btn {
+                padding: 8px 14px;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block js %}
+    <script>
+        (function() {
+
+            const picker = $('#region-picker');
+
+            picker.selectpicker({
+                size: 5,
+                dropupAuto: false
+            })
+
+            picker.on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
+
+                let newLink = '', params = '', foundRegionId = false;
+
+                newLink = window.location.origin + window.location.pathname
+
+                let search = window.location.search.split('?');
+
+                if (search && search.toString()) {
+                    search[1].split('&').forEach(function (param) {
+                        let kv = param.split('=');
+
+                        if (kv[0] === 'region_id') {
+                            params += (kv[0] + '=' + e.target.value)
+                            foundRegionId = true
+                        } else {
+                            params += param
+                        }
+                        params += '&'
+
+                    })
+                }
+
+                if (!foundRegionId) {
+                    params += 'region_id=' + e.target.value + '&';
+                }
+
+                window.location = newLink + "?" + params.slice(0, -1);
+
+            });
+
+        })()
+    </script>
+{% endblock %}
+
+{% block content %}
+
+    <section class="blog-grid">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-12 text-center title">
+                    {% if category.name %}
+                        <h2>{{ category.name }}</h2>
+                    {% else %}
+                        <h2>{% trans 'Organizations' %}</h2>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if category.display_regions_filter %}
+                <div class="row my-4">
+                    <div class="col-12 text-center">
+                        <div>
+
+                            <select name="region" id="region-picker">
+                                <option {% if not request.GET.region_id %}selected="selected"{% endif %} value="0">{% trans 'All' %}</option>
+
+                                {% for region in regions %}
+                                    <optgroup label="{{ region.name }}">
+                                        {% for sub_region in region.children.all %}
+                                            <option value="{{ sub_region.id }}" {% if request.GET.region_id|add:"0" == sub_region.id|add:"0" %}selected="selected"{% endif %}>{{ sub_region.name }}</option>
+                                        {% endfor %}
+                                    </optgroup>
+                                {% endfor %}
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="row mt-4 {% if organizations %}masonary-layout{% endif %}">
+
+                {% for organization in organizations %}
+
+                    <div class="col-lg-4 col-md-6 col-12 masonary-item post__card mb-3">
+                        <div class="exhibhition-one__single wow fadeInUp" data-wow-duration="1500ms">
+                            <div class="exhibhition-one__image">
+                                <div class="exhibhition-one__image-inner">
+                                    <span class="exhibhition-one__image-border-1"></span>
+                                    <span class="exhibhition-one__image-border-2"></span>
+                                    <span class="exhibhition-one__image-border-3"></span>
+                                    <span class="exhibhition-one__image-border-4"></span>
+                                    <img src="{{ organization.main_image.url }}" alt="{{ organization.title }}" class="img-fluid">
+                                    <a href="{{ organization.get_absolute_url }}" class="exhibhition-one__image-link">
+                                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="exhibhition-one__content">
+                                <a href="" class="exhibhition-one__category"></a>
+                                <h3 class="exhibhition-one__title">
+                                    <a href="{{ organization.get_absolute_url }}">{{ organization.title }}</a>
+                                </h3>
+                                <div class="exhibhition-one__bottom">
+                                    <div class="exhibhition-one__bottom-left">
+                                        <span>
+                                            <i class="fa fa-eye mr-2" aria-hidden="true"></i>
+                                        </span>
+                                        <span>{{ organization.view_count }}</span>
+                                    </div>
+                                    <div class="exhibhition-one__bottom-right">
+                                        <a href="{{ organization.get_absolute_url }}" class="thm-btn exhibhition-one__btn">{% trans 'Read More' %}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                {% empty %}
+
+                    <div class="col-12 text-center">
+                        <i class="far fa-book-reader mb-4" style="font-size: 5em; color: #0B5B80;"></i>
+                        <h4 class="text-uppercase" style="font-size: 2em; color:  var(--main-color);">{% trans 'No organizations found' %}</h4>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div>
+                        {% include 'parts/paginator.html' %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+{% endblock content %}

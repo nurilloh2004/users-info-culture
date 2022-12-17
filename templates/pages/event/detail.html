@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+{% load static i18n app_tags recaptcha3 %}
+
+
+{% block title %}{{ event.title }}{% endblock %}
+
+{% block css %}
+    {% recaptcha_init %}
+
+    <link href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'custom/plugins/jquery.fancybox/jquery.fancybox.min.css' %}">
+
+    <style>
+        .py-5 {
+            padding: 26px 0 !important;
+        }
+
+        .event__date {
+            color: #777777 !important;
+        }
+
+        #osm-map {
+            border-radius: 4px;
+            height: 300px;
+        }
+
+        .event-details {
+            padding: 0;
+        }
+
+        .event-image {
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .event-data-value > i.fa {
+            width: 20px;
+            text-align: center;
+        }
+
+        .swal-messages li {
+            font-size: 1.3em;
+            line-height: 2;
+        }
+        .swal-button-container {
+            width: 100%;
+            text-align: center;
+        }
+
+        .title {
+            border-bottom: none;
+        }
+
+        @media (max-width: 992px) {
+            #about-event {
+                margin-top: 2rem;
+            }
+
+            .event-details__event-info .row {
+                flex-direction: column-reverse;
+            }
+
+            .event-details__event-info {
+                padding-top: 0;
+            }
+
+            .event-details__event-info img {
+                margin-top: 0;
+                border-radius: 4px;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block js %}
+    {% recaptcha_ready action_name='application_form' %}
+
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="{% static 'custom/plugins/jquery.fancybox/jquery.fancybox.min.js' %}"></script>
+
+    <script>
+        let element = document.getElementById('osm-map');
+        element.style = 'height: 300px;';
+        let map = L.map(element);
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: ''}).addTo(map);
+        let target = L.latLng(
+            '{{ event.location.latitude|normalize_lat_lon }}',
+            '{{ event.location.longitude|normalize_lat_lon }}'
+        );
+        map.setView(target, 14);
+        L.marker(target).addTo(map);
+
+        $('.page-content .event-img img').wrap(function () {
+            return "<a href='" + this.attributes['src'].value + "' data-fancybox='gallery'></a>";
+        });
+
+        {% if messages %}
+
+            let msg = $('<ul class="list-unstyled mx-auto my-0 swal-messages"></ul>');
+
+            {% for message in messages %}
+                {% if message.level_tag == 'error' %}
+                    msg.append('<li><i class="fa fa-times"></i> {{ message }} <br /></li>');
+                {% elif message.level_tag == 'success' %}
+                    msg.append('<li><i class="fa fa-check"></i> {{ message }} <br /></li>');
+                {% elif message.level_tag == 'info' %}
+                    msg.append('<li><i class="fa fa-info"></i> {{ message }} <br /></li>');
+                {% endif %}
+            {% endfor %}
+
+            swal("", {
+                content: msg[0],
+                icon: 'info'
+            });
+        {% endif %}
+
+    </script>
+{% endblock %}
+
+{% block content %}
+    <section class="event-details">
+        <div class="container">
+
+            <div class="row mb-2">
+                <div class="col-12">
+
+                    <div class="title text-center">
+                        <h2>{{ event.title }}</h2>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="event-details__content row">
+                <div class="col-lg-8">
+
+                    <ul class="nav nav-tabs plan-visit__tab-links">
+                        <li class="nav-item">
+                            <a href="#about-event" data-target="#about-event" class="nav-link  active">{% trans 'About event' %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#contact" data-target="#contact" class="nav-link ">{% trans 'Contact' %}</a>
+                        </li>
+                    </ul>
+
+                    <div class="event-details__single" id="about-event">
+                        <div class="event-details__event-info">
+                            <div class="row">
+                                <div class="col-lg-6 d-flex">
+                                    <div class="my-auto w-100 py-5">
+                                        <ul class="list-unstyled event-details__event-info__list">
+                                            <li>
+                                                <span>{% trans 'Start time' %}</span>
+                                                <p class="event-data-value"><i class="mr-2 fa fa-clock-o"></i><span class="event__date">{{ event.start_date|date:"d-M-Y H:i" }}</span></p>
+                                            </li>
+                                            <li>
+                                                <span>{% trans 'Organizer' %}</span>
+                                                <p class="event-data-value"><i class="mr-2 fa fa-user"></i>{{ event.organizer }}</p>
+                                            </li>
+                                            <li>
+                                                <span>{% trans 'Ticket cost' %}</span>
+                                                {% if event.price >= 1 %}
+                                                    <p class="event-data-value"><i class="mr-2 fa fa-money"></i>{{ event.price }}</p>
+                                                {% elif event.price == 0 %}
+                                                    <p class="event-data-value"><i class="mr-2 fa fa-money"></i>{% trans 'Free' %}</p>
+                                                {% else %}
+                                                    <p class="event-data-value"><i class="mr-2 fa fa-money"></i>{% trans 'No information about price' %}</p>
+                                                {% endif %}
+                                            </li>
+                                            <li>
+                                                <span>{% trans 'Note' %}</span>
+                                                <p class="event-data-value"><i class="mr-2 fa fa-exclamation" aria-hidden="true"></i>{{ event.note }}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 clearfix">
+                                    <div style="background-image: url('{{ event.image.url }}')" class="event-image"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" id="contact">
+
+                        <div class="col-6">
+                            <div>
+                                <div class="event-details__text">{{ event.content|safe }}</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div>
+                                <ul class="event-details__contact-list list-unstyled">
+                                    <li>
+                                        <span>{% trans 'Address' %}:</span>
+                                        <p>{{ event.address }}</p>
+                                    </li>
+                                    <li>
+                                        <span>{% trans 'Event type' %}:</span>
+                                        <p>{{ event.get_event_type_display }}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="event-details__form">
+                        <h3 class="event-details__form-title">Online Booking</h3>
+
+                        <form action="{{ request.path }}" method="post">
+
+                            {% csrf_token %}
+                            <input type="hidden" name="event" value="{{ event.id }}">
+                            {{ form.captcha }}
+
+                            <div class="row">
+
+                                <div class="col-sm-12">
+                                    <input required class="form-control"
+                                       type="{{ form.name.field.widget.input_type }}"
+                                       name="{{ form.name.name }}"
+                                       id="{{ form.name.auto_id }}"
+                                       placeholder="{{ form.name.label }}"
+                                    >
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <input required class="form-control"
+                                       type="{{ form.phone_number.field.widget.input_type }}"
+                                       name="{{ form.phone_number.name }}"
+                                       id="{{ form.phone_number.auto_id }}"
+                                       placeholder="{{ form.phone_number.label }}"
+                                    >
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <input required class="form-control"
+                                       type="{{ form.people_count.field.widget.input_type }}"
+                                       name="{{ form.people_count.name }}"
+                                       id="{{ form.people_count.auto_id }}"
+                                       placeholder="{{ form.people_count.label }}"
+                                       min="1"
+                                       max="10"
+                                    >
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <textarea class="form-control"
+                                              name="{{ form.description.name }}"
+                                              id="{{ form.description.auto_id }}" placeholder="{{ form.description.label }}"></textarea>
+                                </div>
+
+
+                                <div class="col-sm-12">
+                                    <button type="submit" class="thm-btn event-details__form-btn">{% trans 'Proceed to book' %}</button>
+                                </div>
+
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <div class="mt-4">
+                        <div class="organization-detail__map" id="osm-map"></div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+{% endblock %}

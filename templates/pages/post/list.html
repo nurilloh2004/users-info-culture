@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+
+{% block title %}{% if category.title %}{{ category.title }}{% else %}{% trans 'Posts' %}{% endif %} {% endblock %}
+
+{% block css %}
+    <style>
+        .page-title {
+            display: inline-block;
+            color: #fc9a06;
+            font-size: 3.1em;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            margin: 0;
+        }
+
+        .exhibhition-one__bottom-left > span:before {
+            display: none;
+            content: none;
+        }
+
+        .exhibhition-one__bottom-left > span {
+            color: #0B5B80;
+            align-items: center;
+            vertical-align: middle;
+        }
+
+        .exhibhition-one__bottom-left span:nth-child(2) {
+            margin-top: 4px;
+        }
+
+        .exhibhition-one__bottom-left {
+            display: flex;
+            flex-direction: revert;
+            align-items: center;
+            align-items: center;
+        }
+
+        @media (max-width: 1200px) {
+            .exhibhition-one__btn {
+                padding: 8px 14px;
+            }
+
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="page-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center title">
+                    {% if category.title %}
+                        <h2 class="page-title">{{ category.title }}</h2>
+                    {% else %}
+                        <h2 class="page-title">{% trans 'Posts' %}</h2>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if posts %}
+                <div class="row mt-5 masonary-layout">
+
+                    {% for post in posts %}
+                        <div class="col-lg-4 col-md-6 col-12 masonary-item post__card mb-3">
+                            <div class="exhibhition-one__single wow fadeInUp" data-wow-duration="1500ms">
+                                <div class="exhibhition-one__image">
+                                    <div class="exhibhition-one__image-inner">
+                                        <span class="exhibhition-one__image-border-1"></span>
+                                        <span class="exhibhition-one__image-border-2"></span>
+                                        <span class="exhibhition-one__image-border-3"></span>
+                                        <span class="exhibhition-one__image-border-4"></span>
+                                        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid">
+                                        <a href="{{ post.get_absolute_url }}" class="exhibhition-one__image-link">
+                                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="exhibhition-one__content">
+                                    <a href="" class="exhibhition-one__category"></a>
+                                    <h3 class="exhibhition-one__title">
+                                        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                                    </h3>
+                                    <div class="exhibhition-one__bottom">
+                                        <div class="exhibhition-one__bottom-left">
+                                            <span>
+                                                <i class="fa fa-clock-o mr-2" aria-hidden="true"></i>
+                                            </span>
+                                            <span>{{ post.posting_date|date:"d M, Y | H:i" }}</span>
+                                        </div>
+                                        <div class="exhibhition-one__bottom-right">
+                                            <a href="{{ post.get_absolute_url }}" class="thm-btn exhibhition-one__btn">{% trans 'Read More' %}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            {% else %}
+
+                <div class="row mt-5">
+                    <div class="col-12 text-center">
+                        <i class="far fa-book-reader mb-4" style="font-size: 5em; color: #0B5B80;"></i>
+                        <h4 class="text-uppercase" style="font-size: 2em; color: var(--main-color);">{% trans 'No posts found' %}</h4>
+                    </div>
+                </div>
+
+            {% endif %}
+
+            <div class="row">
+                <div class="col-12">
+                    <div>
+                        {% include 'parts/paginator.html' %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

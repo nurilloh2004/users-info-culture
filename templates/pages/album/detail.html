@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+
+{% block title %}{{ album.title }}{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'custom/plugins/jquery.fancybox/jquery.fancybox.min.css' %}">
+
+    <style>
+        .play__video {
+            width: 100%;
+            height: 100%;
+        }
+
+        .play__video::before {
+            position: absolute;
+            z-index: 1;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #fff;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--second-color);
+            padding: 17.5px 21px;
+            box-shadow: 0px 0px 5px 4px #ffffff;
+        }
+
+        .play__video::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--main-color);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            transform-origin: center;
+            animation: burn 3s linear infinite;
+        }
+
+        audio {
+            width: 100%;
+        }
+
+        .no_hover {
+            display: block;
+            height: 210px;
+        }
+        .no_hover > img {
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        @keyframes burn {
+            0% {
+                width: 10px;
+                height: 10px;
+                opacity: 1;
+            }
+            25% {
+                width: 25px;
+                height: 25px;
+                opacity: .8;
+            }
+            50% {
+                width: 50px;
+                height: 50px;
+                opacity: .6;
+            }
+            75% {
+                width: 75px;
+                height: 75px;
+                opacity: .4;
+            }
+            100% {
+                width: 85px;
+                height: 85px;
+                opacity: .0;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .media-title {
+                margin-top: 10px;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'custom/plugins/jquery.fancybox/jquery.fancybox.min.js' %}"></script>
+
+    <script>
+        $('img.fancybox').wrap(function () {
+            return "<a href='" + this.attributes['src'].value + "' data-fancybox='gallery-1'></a>";
+        });
+        $('img.fancybox-gallery-item').wrap(function () {
+            return "<a class='no_hover d-inline-block' href='" + this.attributes['src'].value + "' data-fancybox='gallery-2' data-caption='" + this.attributes['data-caption'].value + "'></a>";
+        });
+        $('img.youtube-thumb').wrap(function () {
+            return "<a href='" + this.attributes['data-video-url'].value + "' class='position-relative fa fa-play play__video d-block' data-fancybox='gallery-3'></a>";
+        });
+        $('video.youtube-thumb').wrap(function () {
+            return "<a href='" + this.attributes['data-video-url'].value + "' class='position-relative fa fa-play play__video d-block' data-fancybox='gallery-3'></a>";
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-12 col-12">
+                <img src="{{ album.albumimage_set.all.0.image.url }}" alt="{{ album.title }}" class="fancybox text-center img-fluid" style="border-radius: 4px"/>
+            </div>
+            <div class="col-lg-8 col-md-8 col-12">
+                <h3 class="mb-3 mt-3 mt-sm-3">{{ album.title }}</h3>
+                <h6 style="color: rgba(169,169,169,0.75); margin: 0;">
+
+                    <i class="fa fa-calendar"></i> {{ album.time_added|date:"d / M / Y H:i" }} |
+
+                    <i class="fa fa-tag"></i> {{ album.get_event_type_display }} |
+                    <i class="fa fa-globe"></i> {{ album.get_region_display }} |
+                    <i class="fa fa-eye"></i> {{ album.view_count }}
+
+                </h6>
+
+                <h6 style="color: rgba(169,169,169,0.75); margin: 7px 0 0 0;">
+                    <i class="fas fa-map-marked-alt"></i> {{ album.place }}
+                </h6>
+                <div><p>{{ album.description|safe }}</p></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <hr />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="photo">
+                    <div class="row">
+
+                        {% for album_image in album.albumimage_set.all %}
+                            {% if album_image.image and album_image.image.url %}
+                                <div class="col-lg-4 col-md-6 col-12 my-2 text-center">
+                                    <img src="{{ album_image.image.url }}" alt="{{ album_image.title }}" class="fancybox-gallery-item" {% if album_image.title %} data-caption="{{ album_image.title }}" {% else %} data-caption=" " {% endif %} style="border-radius: 4px"/>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

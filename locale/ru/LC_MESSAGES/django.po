@@ -1,0 +1,858 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-06 15:09+0500\n"
+"PO-Revision-Date: 2021-06-21 01:31+0437\n"
+"Last-Translator: b'  <>'\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+"X-Translated-Using: django-rosetta 0.9.6\n"
+
+#: main/admin.py:170
+msgid "Month"
+msgstr "Месяц"
+
+#: main/models.py:185
+msgid "Site setting"
+msgstr "Настройки сайта"
+
+#: main/models.py:466
+msgid "About page data"
+msgstr "Данные страницы 'О нас'"
+
+#: main/urls.py:7 main/urls.py:8
+msgid "Administration page of website madaniyat.uz"
+msgstr "Страница администрирования сайта madaniyat.uz"
+
+#: main/urls.py:9 templates/pages/home.html:5
+msgid "Home page"
+msgstr "Главная страница"
+
+#: main/utils.py:28
+msgid "Received application from https://madaniyat.uz website"
+msgstr "Получена заявка с сайта https://madaniyat.uz"
+
+#: main/utils.py:39
+msgid "Received event ordering from https://madaniyat.uz website"
+msgstr "Получен заказ на мероприятие с сайта https://madaniyat.uz"
+
+#: main/views.py:168
+msgid "Your application received successfully"
+msgstr "Ваша заявка успешно получена"
+
+#: main/views.py:241
+msgid "Invalid data sent"
+msgstr "Отправлены неверные данные"
+
+#: main/views.py:251
+msgid "Your order received successfully"
+msgstr "Ваш заказ успешно получен"
+
+#: poll/models.py:24
+msgid "Poll"
+msgstr "Опрос"
+
+#: poll/models.py:25
+#, fuzzy
+#| msgid "Poll"
+msgid "Polls"
+msgstr "Опрос"
+
+#: poll/models.py:54
+msgid "Answer"
+msgstr "Ответ"
+
+#: poll/models.py:55
+msgid "Answers"
+msgstr "Ответы"
+
+#: poll/models.py:78 poll/templates/poll/poll.html:120
+msgid "Vote"
+msgstr "Голосование"
+
+#: poll/models.py:79
+#, fuzzy
+#| msgid "Vote"
+msgid "Votes"
+msgstr "Голосование"
+
+#: poll/templates/poll/result.html:24
+msgid "Total votes"
+msgstr "Все ответы"
+
+#: templates/base.html:8 templates/parts/additional.html:13
+#: templates/parts/footer.html:59
+msgid "Ministry of Culture of the Republic of Uzbekistan"
+msgstr "Министерство Культуры Республики Узбекистан"
+
+#: templates/base.html:101
+#, fuzzy
+#| msgid "We successfully got your message!"
+msgid "We successfully get you message!"
+msgstr "Мы успешно получили ваше сообщение!"
+
+#: templates/base.html:102
+msgid "Oops! Something went wrong"
+msgstr "Что-то пошло не так"
+
+#: templates/base.html:103
+msgid "Loading"
+msgstr "Загрузка"
+
+#: templates/base.html:104
+msgid "Info"
+msgstr "Информация"
+
+#: templates/base.html:105
+msgid "Please, choose an answer"
+msgstr "Пожалуйста, выберите ответ"
+
+#: templates/pages/album/list.html:5
+msgid "Albums"
+msgstr "Альбомы"
+
+#: templates/pages/album/list.html:39 templates/pages/home.html:1048
+msgid "Festivals and competitions"
+msgstr "Фестивали и конкурсы"
+
+#: templates/pages/album/list.html:66
+msgid "No festivals found"
+msgstr "Фестивалей не найдено"
+
+#: templates/pages/application_form.html:5
+msgid "Application"
+msgstr "Приложение"
+
+#: templates/pages/application_form.html:109
+msgid "Send your appeal"
+msgstr "Отправьте ваш запрос"
+
+#: templates/pages/application_form.html:197
+msgid "Submit"
+msgstr "Отправить"
+
+#: templates/pages/contact.html:5 templates/pages/contact.html:68
+msgid "Contact us"
+msgstr "Свяжитесь с нами"
+
+#: templates/pages/contact.html:78 templates/pages/organization/detail.html:167
+#: templates/pages/person/detail.html:87 templates/pages/person/list.html:74
+msgid "Phone number"
+msgstr "Телефонный номер"
+
+#: templates/pages/contact.html:80 templates/pages/contact.html:90
+msgid "Call"
+msgstr "Вызов"
+
+#: templates/pages/contact.html:88 templates/pages/statistics/list.html:109
+msgid "Helpline"
+msgstr "Телефон доверия"
+
+#: templates/pages/contact.html:98 templates/pages/person/detail.html:102
+#: templates/pages/person/list.html:79
+msgid "E-Mail"
+msgstr "Электронная почта"
+
+#: templates/pages/contact.html:105
+msgid "Send mail"
+msgstr "Отправить почту"
+
+#: templates/pages/contact.html:114 templates/parts/additional.html:77
+msgid "Work time"
+msgstr "Рабочее время"
+
+#: templates/pages/contact.html:123
+msgid "Application form"
+msgstr "Форма заявки"
+
+#: templates/pages/contact.html:125
+msgid "Open"
+msgstr "Открыть"
+
+#: templates/pages/contact.html:134 templates/pages/event/detail.html:197
+#: templates/pages/organization/detail.html:157
+msgid "Address"
+msgstr "Адрес"
+
+#: templates/pages/contact.html:136
+msgid "Buses"
+msgstr "Автобусы"
+
+#: templates/pages/event/detail.html:141
+msgid "About event"
+msgstr "О мероприятии"
+
+#: templates/pages/event/detail.html:144
+msgid "Contact"
+msgstr "Контакт"
+
+#: templates/pages/event/detail.html:155
+msgid "Start time"
+msgstr "Время начала"
+
+#: templates/pages/event/detail.html:159
+msgid "Organizer"
+msgstr "Организатор"
+
+#: templates/pages/event/detail.html:163
+msgid "Ticket cost"
+msgstr "Стоимость билета"
+
+#: templates/pages/event/detail.html:167
+msgid "Free"
+msgstr "Бесплатно"
+
+#: templates/pages/event/detail.html:169
+msgid "No information about price"
+msgstr "Нет информации о цене"
+
+#: templates/pages/event/detail.html:173
+msgid "Note"
+msgstr "Примечание"
+
+#: templates/pages/event/detail.html:201
+msgid "Event type"
+msgstr "Тип события"
+
+#: templates/pages/event/detail.html:260
+msgid "Proceed to book"
+msgstr "Перейти к бронированию"
+
+#: templates/pages/event/list.html:5
+msgid "Event list"
+msgstr "Список событий"
+
+#: templates/pages/event/list.html:247 templates/pages/event/list.html:264
+#: templates/pages/home.html:846
+msgid "Events"
+msgstr "События"
+
+#: templates/pages/event/list.html:305 templates/pages/home.html:693
+msgid "No events found in selected date"
+msgstr "За выбранную дату событий не найдено"
+
+#: templates/pages/event/list.html:314
+msgid "Exhibitions"
+msgstr "Выставки"
+
+#: templates/pages/event/list.html:354 templates/pages/home.html:735
+msgid "No exhibitions found in selected date"
+msgstr "В выбранную дату выставок не найдено"
+
+#: templates/pages/home.html:550 templates/pages/post/detail.html:202
+msgid "Read more"
+msgstr "Подробнее"
+
+#: templates/pages/home.html:560
+msgid "Previous"
+msgstr "Пред."
+
+#: templates/pages/home.html:564
+msgid "Next"
+msgstr "След."
+
+#: templates/pages/home.html:572
+msgid "News"
+msgstr "Новости"
+
+#: templates/pages/home.html:602 templates/pages/media/list.html:85
+#: templates/pages/organization/list.html:163 templates/pages/post/list.html:94
+msgid "Read More"
+msgstr "Читать далее"
+
+#: templates/pages/home.html:613
+msgid "More news"
+msgstr "Больше новостей"
+
+#: templates/pages/home.html:622 templates/pages/home.html:1015
+msgid "Key indicators"
+msgstr "Ключевые показатели"
+
+#: templates/pages/home.html:648
+msgid "Events calendar"
+msgstr "Календарь событий"
+
+#: templates/pages/home.html:660
+msgid "Event"
+msgstr "Мероприятие"
+
+#: templates/pages/home.html:663 templates/pages/home.html:705
+#: templates/pages/organization/list.html:116
+#: templates/pages/statistics/list.html:111
+msgid "All"
+msgstr "Все"
+
+#: templates/pages/home.html:702
+msgid "Exhibition"
+msgstr "Выставка"
+
+#: templates/pages/home.html:756
+msgid "Polls, media and useful links"
+msgstr "Опрос, медиа и полезные ссылки"
+
+#: templates/pages/home.html:758
+msgid "Media and useful links"
+msgstr "Медиа и полезные ссылки"
+
+#: templates/pages/home.html:816
+msgid "Foydali havolalar"
+msgstr ""
+
+#: templates/pages/home.html:852
+msgid "Current"
+msgstr "Текущий"
+
+#: templates/pages/home.html:859
+msgid "Upcoming"
+msgstr "Предстоящие"
+
+#: templates/pages/home.html:866
+msgid "Past"
+msgstr "Прошлые"
+
+#: templates/pages/home.html:871
+msgid "All upcoming events"
+msgstr "Все предстоящие события"
+
+#: templates/pages/home.html:888 templates/pages/home.html:930
+#: templates/pages/home.html:972
+msgid "No information"
+msgstr "Нет информации"
+
+#: templates/pages/home.html:909 templates/pages/home.html:951
+#: templates/pages/home.html:993
+msgid "About"
+msgstr "Больше"
+
+#: templates/pages/home.html:914 templates/pages/home.html:956
+#: templates/pages/home.html:998
+msgid "Events not found"
+msgstr "События не найдены"
+
+#: templates/pages/home.html:1022
+msgid "Accepted"
+msgstr "Принято"
+
+#: templates/pages/home.html:1027 templates/pages/statistics/list.html:116
+msgid "On process"
+msgstr "В процессе"
+
+#: templates/pages/home.html:1032
+msgid "Solved"
+msgstr "Решено"
+
+#: templates/pages/home.html:1037
+msgid "Non acceptable"
+msgstr "Неприемлемо"
+
+#: templates/pages/home.html:1068
+msgid "View all festivals"
+msgstr "Все фестивали"
+
+#: templates/pages/media/detail.html:186
+msgid "No data about audio"
+msgstr "Нет доп. информации"
+
+#: templates/pages/media/index.html:4 templates/pages/media/list.html:39
+msgid "Media"
+msgstr "Медиа"
+
+#: templates/pages/media/index.html:37
+msgid "Video gallery"
+msgstr "Видео галерея"
+
+#: templates/pages/media/index.html:46
+msgid "Audio gallery"
+msgstr "Аудиогалерея"
+
+#: templates/pages/media/index.html:55
+msgid "Photo gallery"
+msgstr "Фотогалерея"
+
+#: templates/pages/media/list.html:5
+msgid "Media list"
+msgstr "Список СМИ"
+
+#: templates/pages/media/list.html:100
+msgid "No media found"
+msgstr "Ничего не найдено"
+
+#: templates/pages/not_found.html:5 templates/pages/not_found.html:352
+msgid "Page not found"
+msgstr "Страница не найдена"
+
+#: templates/pages/not_found.html:353
+msgid "Go to home page"
+msgstr "Перейти на домашнюю страницу"
+
+#: templates/pages/organization/detail.html:153
+msgid "Head of office"
+msgstr "Руководитель офиса"
+
+#: templates/pages/organization/detail.html:162
+msgid "Category"
+msgstr "Категория"
+
+#: templates/pages/organization/detail.html:171
+msgid "Website"
+msgstr "Веб-сайт"
+
+#: templates/pages/organization/list.html:5
+#: templates/pages/organization/list.html:105
+msgid "Organizations"
+msgstr "Организация"
+
+#: templates/pages/organization/list.html:174
+msgid "No organizations found"
+msgstr "Не найдено ни одной организации"
+
+#: templates/pages/person/detail.html:79 templates/pages/person/list.html:69
+msgid "Admission days"
+msgstr "Приемные дни"
+
+#: templates/pages/person/detail.html:117
+msgid "Make an appointment"
+msgstr "Записаться на прием"
+
+#: templates/pages/person/detail.html:132
+#: templates/pages/person/detail.html:179
+msgid "Description"
+msgstr "Описание"
+
+#: templates/pages/person/detail.html:142
+msgid "Professional history"
+msgstr "Профессиональная история"
+
+#: templates/pages/person/detail.html:166 templates/pages/person/list.html:43
+msgid "Vacant"
+msgstr "Вакант"
+
+#: templates/pages/person/list.html:5 templates/pages/person/list.html:22
+msgid "Administration"
+msgstr "Администрация"
+
+#: templates/pages/person/list.html:20
+msgid "Central office"
+msgstr "Центральный офис"
+
+#: templates/pages/post/detail.html:163
+msgid "Attachments"
+msgstr "Прикрепленные файлы"
+
+#: templates/pages/post/detail.html:181
+msgid "Other posts"
+msgstr "Другие посты"
+
+#: templates/pages/post/detail.html:210
+msgid "No other posts found"
+msgstr "Другие посты не найдены"
+
+#: templates/pages/post/list.html:5 templates/pages/post/list.html:58
+msgid "Posts"
+msgstr "Посты"
+
+#: templates/pages/post/list.html:108
+msgid "No posts found"
+msgstr "Посты не найдены"
+
+#: templates/pages/region/region.html:5
+msgid "Regional offices"
+msgstr "Региональные офисы"
+
+#: templates/pages/region/region.html:103
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organizations map"
+msgstr "Организация"
+
+#: templates/pages/search.html:5 templates/pages/search.html:19
+msgid "Search results"
+msgstr "Результаты поиска"
+
+#: templates/pages/search.html:41
+#, fuzzy
+#| msgid "No posts found"
+msgid "No items found"
+msgstr "Посты не найдены"
+
+#: templates/pages/statistics/list.html:5
+#: templates/pages/statistics/list.html:66
+msgid "Application statistics"
+msgstr "Статистика обращений"
+
+#: templates/pages/statistics/list.html:76
+#: templates/pages/statistics/list.html:79
+msgid "Start date"
+msgstr "Дата начала"
+
+#: templates/pages/statistics/list.html:84
+#: templates/pages/statistics/list.html:87
+msgid "End date"
+msgstr "Дата окончания"
+
+#: templates/pages/statistics/list.html:107
+msgid "Written"
+msgstr "Писменные"
+
+#: templates/pages/statistics/list.html:108
+msgid "Oral appeals"
+msgstr "Устные"
+
+#: templates/pages/statistics/list.html:110
+msgid "Online application"
+msgstr "Онлайн"
+
+#: templates/pages/statistics/list.html:124
+msgid "Resolved"
+msgstr "Решено"
+
+#: templates/pages/statistics/list.html:132
+msgid "Rejected"
+msgstr "Не решено"
+
+#: templates/parts/additional.html:11 templates/parts/header.html:44
+msgid "Logo of Ministry of Culture of the Republic Uzbekistan"
+msgstr "Логотип Министерства Культуры Республики Узбекистан"
+
+#: templates/parts/additional.html:14 templates/parts/header.html:47
+msgid "Official website"
+msgstr "Официальный веб-сайт"
+
+#: templates/parts/additional.html:63
+msgid "Contact Us"
+msgstr "Свяжитесь с нами"
+
+#: templates/parts/additional.html:92
+msgid "Type here to search..."
+msgstr "Введите здесь для поиска"
+
+#: templates/parts/additional.html:104
+msgid "Increase font size"
+msgstr "Увеличить размер шрифта"
+
+#: templates/parts/additional.html:108
+msgid "Default font size"
+msgstr "Размер шрифта по умолчанию"
+
+#: templates/parts/additional.html:112
+msgid "Decrease font size"
+msgstr "Уменьшить размер шрифта"
+
+#: templates/parts/additional.html:116
+msgid "Sound assistance"
+msgstr "Звуковой помощник"
+
+#: templates/parts/additional.html:120
+msgid "Greyscale mode"
+msgstr "Режим градаций серого"
+
+#: templates/parts/additional.html:128
+msgid "Describe found typo"
+msgstr "Опишите найденную опечатку"
+
+#: templates/parts/additional.html:136
+msgid "Description (not required)"
+msgstr "Описание (не обязательно)"
+
+#: templates/parts/additional.html:140
+msgid "Send"
+msgstr "Отправить"
+
+#: templates/parts/footer.html:11
+msgid "Get connected with us on social networks!"
+msgstr "Присоединяйтесь к нам в социальных сетях!"
+
+#: templates/parts/footer.html:67
+msgid "Our address"
+msgstr "Наш адресс"
+
+#: templates/parts/footer.html:76
+msgid "Phone number and fax"
+msgstr "Телефон и факс"
+
+#: templates/parts/footer.html:94
+msgid "Visitor statistics"
+msgstr "Статистика посетителей"
+
+#: templates/parts/footer.html:140
+msgid "Found typo? Select it and press CTRL+Enter"
+msgstr "Нашли опечатку? Выделите его и нажмите CTRL + Enter."
+
+#: templates/parts/footer.html:148
+msgid "Site was created by"
+msgstr "Сайт создал"
+
+#: templates/parts/header.html:46
+msgid "Ministry of Culture of the Republic<br>of Uzbekistan"
+msgstr "Министерство культуры республики <br> Узбекистана"
+
+#~ msgid "Andijan"
+#~ msgstr "Андижан"
+
+#~ msgid "Bukhara"
+#~ msgstr "Бухара"
+
+#~ msgid "Fergana"
+#~ msgstr "Фергана"
+
+#~ msgid "Jizzakh"
+#~ msgstr "Джиззак"
+
+#~ msgid "Karakalpakstan"
+#~ msgstr "Каракалпакстан"
+
+#~ msgid "Kashkadarya"
+#~ msgstr "Кашкадарья"
+
+#~ msgid "Khorezm"
+#~ msgstr "Хорезм"
+
+#~ msgid "Namangan"
+#~ msgstr "Наманган"
+
+#~ msgid "Navoi"
+#~ msgstr "Навои"
+
+#~ msgid "Samarkand"
+#~ msgstr "Самарканд"
+
+#~ msgid "Surkhandarya"
+#~ msgstr "Сурхандарья"
+
+#~ msgid "Syrdarya"
+#~ msgstr "Сырдаря"
+
+#~ msgid "Tashkent city"
+#~ msgstr "г. Ташкент"
+
+#~ msgid "Tashkent region"
+#~ msgstr "Ташкентская обл."
+
+#~ msgid "Banner"
+#~ msgstr "Баннер"
+
+#~ msgid "Banners"
+#~ msgstr "Баннеры"
+
+#~ msgid "Menu item"
+#~ msgstr "Пункт меню"
+
+#~ msgid "Menu items"
+#~ msgstr "Пункты меню"
+
+#~ msgid "Event order"
+#~ msgstr "Заказ билета"
+
+#~ msgid "Event orders"
+#~ msgstr "Заказы билета"
+
+#~ msgid "Site settings"
+#~ msgstr "Настройка сайта"
+
+#~ msgid "Person"
+#~ msgstr "Персонал"
+
+#~ msgid "Persons"
+#~ msgstr "Персоналы"
+
+#~ msgid "Required to fill field"
+#~ msgstr "Поле обязательно для заполнения"
+
+#~ msgid "Static page"
+#~ msgstr "Статичная страница"
+
+#~ msgid "Static pages"
+#~ msgstr "Статичные страницы"
+
+#~ msgid "Even one of title or content should have a value."
+#~ msgstr "Одно из полей 'Заголовок' или 'Содержание' должно быть заполнено."
+
+#~ msgid "Post category"
+#~ msgstr "Категория публикации"
+
+#~ msgid "Post categories"
+#~ msgstr "Категории публикаций"
+
+#~ msgid "Post"
+#~ msgstr "Пост"
+
+#~ msgid "Post image"
+#~ msgstr "Изображение поста"
+
+#~ msgid "Post images"
+#~ msgstr "Изображения поста"
+
+#~ msgid "Post file"
+#~ msgstr "Файл поста"
+
+#~ msgid "Post files"
+#~ msgstr "Файлы поста"
+
+#~ msgid "Organization category"
+#~ msgstr "Категория организации"
+
+#~ msgid "Organization categories"
+#~ msgstr "Категории организаций"
+
+#~ msgid "Organization"
+#~ msgstr "Организация"
+
+#~ msgid "Regional office"
+#~ msgstr "Региональный офис"
+
+#~ msgid "Reviewing"
+#~ msgstr "В процессе"
+
+#~ msgid "Resolving"
+#~ msgstr "Решено"
+
+#~ msgid "Applications"
+#~ msgstr "Приложения"
+
+#~ msgid "Video"
+#~ msgstr "Видео"
+
+#~ msgid "Audio"
+#~ msgstr "Аудио"
+
+#~ msgid "Photo"
+#~ msgstr "Фото"
+
+#~ msgid "Medias"
+#~ msgstr "Медиа"
+
+#~ msgid "Media object"
+#~ msgstr "Объект медиа"
+
+#~ msgid "Media objects"
+#~ msgstr "Объекты медиа"
+
+#~ msgid "One of these field need to be filled"
+#~ msgstr "Одно из этих полей необходимо заполнить"
+
+#~ msgid "Image field must be filled"
+#~ msgstr "Поле изображения должно быть заполнено"
+
+#~ msgid "Statistical data"
+#~ msgstr "Статистическая информация"
+
+#~ msgid "Statistical datas"
+#~ msgstr "Статистические данные"
+
+#~ msgid "Typo"
+#~ msgstr "Опечатка"
+
+#~ msgid "Typos"
+#~ msgstr "Опечатки"
+
+#~ msgid "Public transports"
+#~ msgstr "Общественный транспорт"
+
+#~ msgid "About us"
+#~ msgstr "О нас"
+
+#~ msgid ""
+#~ "The Ministry of Culture of the Republic of Uzbekistan is a public "
+#~ "administration body in the field of culture and reports to the Cabinet of "
+#~ "Ministers of the Republic of Uzbekistan"
+#~ msgstr ""
+#~ "Министерство культуры Республики Узбекистан является органом "
+#~ "государственного управления в области культуры и подотчетен Кабинету "
+#~ "Министров Республики Узбекистан."
+
+#~ msgid ""
+#~ "The Ministry cooperates with other public administration bodies, local "
+#~ "state authorities and other organizations in the implementation of its "
+#~ "tasks and functions."
+#~ msgstr ""
+#~ "Министерство взаимодействует с другими органами государственного "
+#~ "управления, местными государственными органами и другими организациями "
+#~ "при выполнении своих задач и функций."
+
+#~ msgid "Image of building of Ministry of culture"
+#~ msgstr "Изображение здания Министерства культуры"
+
+#~ msgid "Image of building of Museum of history of Uzbekistan"
+#~ msgstr "Изображение здания Музея истории Узбекистана"
+
+#~ msgid "Upcoming events"
+#~ msgstr "Предстоящие события"
+
+#~ msgid "No exhibition found in selected date"
+#~ msgstr "В выбранную дату выставок не найдено"
+
+#~ msgid "Not solved"
+#~ msgstr "Не принято"
+
+#~ msgid "File #"
+#~ msgstr "Файл №"
+
+#~ msgid "Statistics"
+#~ msgstr "Статистика"
+
+#~ msgid "Received"
+#~ msgstr "Получено"
+
+#~ msgid "Successfull"
+#~ msgstr "Успешно"
+
+#~ msgid "Invalid"
+#~ msgstr "Инвалид"
+
+#~ msgid ""
+#~ "Icons can be found from <a href='https://fontawesome.com/v5.15/"
+#~ "icons'>here</a>"
+#~ msgstr ""
+#~ "Иконки можно найти <a href='https://fontawesome.com/v5.15/icons'>здесь</a>"
+
+#~ msgid "Polls and useful links"
+#~ msgstr "Опрос и полезные ссылки"
+
+#~ msgid "Useful link"
+#~ msgstr "Полезная ссылка"
+
+#~ msgid "Useful links"
+#~ msgstr "Полезные ссылки"
+
+#~ msgid "Organization region"
+#~ msgstr "Регион организации"
+
+#~ msgid "Organization regions"
+#~ msgstr "Регионы организации"
+
+#~ msgid "Festival"
+#~ msgstr "Фестиваль"
+
+#~ msgid "Competition"
+#~ msgstr "Соревнование"
+
+#~ msgid "Local"
+#~ msgstr "Местный"
+
+#~ msgid "International"
+#~ msgstr "Международный"
+
+#~ msgid "Region"
+#~ msgstr "Регион"
+
+#~ msgid "Full name"
+#~ msgstr "Ф. И. О."
+
+#~ msgid "File"
+#~ msgstr "Файл"
+
+#~ msgid "Application content"
+#~ msgstr "Содержание запроса"

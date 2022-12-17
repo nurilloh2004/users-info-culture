@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+
+{% block title %}{{ person.position }}{% endblock %}
+
+{% block css %}
+    <style>
+        .person-detail {
+            padding: 0;
+        }
+        .person-detail__wrapper {
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .accordion > .card .card-header button.btn-block {
+            color: #fff;
+        }
+
+        .accordion > .card .card-header {
+            background: #0B5B80;
+        }
+
+        .pad-left {
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+
+        .pad-left a {
+            transition: all .4s;
+            border-radius: 4px;
+        }
+
+        .pad-left a:hover,
+        .pad-left a:hover span {
+            color: #0B5B80;
+            background-color: #fff;
+        }
+
+        .person-detail__position h4 {
+            font-size: 1.7em;
+        }
+
+        .appointment-button {
+            background-color: var(--second-color);
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <section class="person-detail">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-12 text-center mb-5 title">
+                    <h1>{{ person.position }}</h1>
+                </div>
+            </div>
+
+            {% if not person.is_vacant %}
+                <div class="row">
+                    <div class="col-lg-4 col-md-12">
+                        <div class="person-detail__wrapper">
+                            <div>
+                                <div class="person-detail__image">
+                                    <img src="{{ person.resolve_image }}" alt="{{ person.full_name }}" class="img-fluid" />
+                                </div>
+                            </div>
+                            <div>
+                                <div class="person-detail__position mb-3">
+                                    <h4>{{ person.full_name }}</h4>
+                                </div>
+                                <div class="person-detail__detail">
+
+                                    <div class="person-detail__days">
+                                        {% if person.admission_days %}
+                                            <div><i class="fa fa-clock m-1"></i>
+                                                <span>{% trans 'Admission days' %}:</span></div>
+                                            <h6 class="pad-left">{{ person.admission_days }}</h6>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="person-detail__number">
+                                        <div>
+                                            <i class="fa fa-phone m-1"></i>
+                                            <span>{% trans 'Phone number' %}:</span>
+                                        </div>
+                                        <span class="pad-left">
+                                            <a href="tel:{{ person.phone_number }}">
+                                                {{ person.phone_number }}
+                                                <span class="fa fa-external-link m-1"></span>
+                                            </a>
+                                        </span>
+                                    </div>
+
+                                    {% if person.email %}
+                                        <div class="person-detail__mail">
+
+                                            <div>
+                                                <i class="fa fa-envelope m-1"></i>
+                                                <span>{% trans 'E-Mail' %}:</span>
+                                            </div>
+
+                                            <span class="pad-left">
+                                                <a href="mailto:{{ person.email }}">
+                                                    {{ person.email }}
+                                                    <span class="fa fa-external-link m-1"></span>
+                                                </a>
+                                            </span>
+
+                                        </div>
+                                    {% endif %}
+
+                                    {% if not person.is_vacant %}
+                                        <div class="mt-3">
+                                            <a href="{% url 'application_form' %}" class="btn d-block appointment-button">{% trans 'Make an appointment' %}</a>
+                                        </div>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8 col-md-12 mt-lg-0 mt-sm-4">
+                        <div class="tab-content">
+                            <div class="tab-pane show active animated fadeInRight person-detail__accordion" id="manage">
+                                <div class="accrodion-grp" data-grp-name="faq-page__accrodion">
+                                    <div class="accrodion active">
+                                        <div class="accrodion-title">
+                                            <h4>{% trans 'Description' %}</h4>
+                                        </div>
+                                        <div class="accrodion-content">
+                                            <div class="inner">
+                                                {{ person.description|safe }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accrodion ">
+                                        <div class="accrodion-title">
+                                            <h4>{% trans 'Professional history' %}</h4>
+                                        </div>
+                                        <div class="accrodion-content">
+                                            <div class="inner">
+                                                {{ person.professional_history|safe }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="row">
+                    <div class="col-lg-4 col-md-12">
+                        <div class="person-detail__wrapper">
+                            <div>
+                                <div class="person-detail__image">
+                                    <img src="{{ person.resolve_image }}" alt="{{ person.position }}" class="img-fluid" />
+                                </div>
+                            </div>
+                            <div>
+                                <div class="person-detail__position">
+                                    <h4>({% trans 'Vacant' %}) {{ person.position }}</h4>
+
+                                </div>
+                                <div class="person-detail__detail"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-12">
+                        <div class="tab-content">
+                            <div class="tab-pane show active animated fadeInRight person-detail__accordion" id="manage">
+                                <div class="accrodion-grp" data-grp-name="faq-page__accrodion">
+                                    <div class="accrodion active">
+                                        <div class="accrodion-title">
+                                            <h4>{% trans 'Description' %}</h4>
+                                        </div>
+                                        <div class="accrodion-content">
+                                            <div class="inner">
+                                                {{ person.description|safe }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

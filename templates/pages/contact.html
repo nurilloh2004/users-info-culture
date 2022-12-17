@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+
+{% block title %}{% trans 'Contact us' %}{% endblock %}
+
+{% block css %}
+    <style>
+        .card {
+            border: 2px solid #fc9a06;
+            color: #000;
+            height: 100%;
+        }
+        .card-body {
+            display: flex;
+            flex-flow: column nowrap;
+        }
+        .card-action {
+            margin-top: auto;
+        }
+        .card-title {
+            text-transform: uppercase;
+        }
+        .card-icon {
+            font-size: 3em;
+        }
+
+        .page-title {
+            color: #000;
+        }
+
+        .btn {
+            background-color: var(--main-color) !important;
+            border: none;
+        }
+
+        .btn:active,
+        .btn:focus,
+        .btn:hover {
+            background-color: var(--second-color) !important;
+            box-shadow: none !important;
+        }
+
+        .card-val {
+            margin-bottom: 0.9em;
+            line-height: 0.8;
+        }
+
+        .card-val > a {
+            color: #fc9a06;
+        }
+
+        .map {
+            border: 2px solid #fc9a06;
+            border-radius: .25rem;
+            padding: 5px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+        <div class="row my-4">
+            <div class="col-12">
+                <div class="title">
+                    <h2 class="text-center text-uppercase font-weight-bold page-title">{% trans 'Contact us' %}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-lg-4 col-md-4 col-sm-6 mb-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center mb-2 card-icon"><i class="fa fa-phone"></i></div>
+                        <h5 class="card-title text-center">{% trans 'Phone number' %}</h5>
+                        <p class="card-val card-text text-center font-weight-bold">{{ about_page_data.phone_number }}</p>
+                        <a href="tel:{{ about_page_data.phone_number }}" class="btn btn-primary d-block card-action">{% trans 'Call' %}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 mb-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center mb-2 card-icon"><i class="fa fa-question-circle"></i></div>
+                        <h5 class="card-title text-center">{% trans 'Helpline' %}</h5>
+                        <p class="card-val card-text text-center font-weight-bold">{{ about_page_data.helpline }}</p>
+                        <a href="tel:{{ about_page_data.helpline }}" class="btn btn-primary d-block card-action">{% trans 'Call' %}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 mb-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center mb-2 card-icon"><i class="fa fa-envelope"></i></div>
+                        <h5 class="card-title text-center">{% trans 'E-Mail' %}</h5>
+                        <p class="card-val card-text text-center font-weight-bold">
+                            <a href="mailto:{{ about_page_data.email1 }}" class="">{{ about_page_data.email1 }} <i class="fal fa-share-all"></i></a>
+                        </p>
+                        <p class="card-val card-text text-center font-weight-bold">
+                            <a href="mailto:{{ about_page_data.email2 }}" class="">{{ about_page_data.email2 }} <i class="fal fa-share-all"></i></a>
+                        </p>
+                        <a href="mailto:{{ about_page_data.email1 }}" class="btn btn-primary d-block card-action">{% trans 'Send mail' %}</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-6 mb-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center mb-2 card-icon"><i class="fa fa-clock"></i></div>
+                        <h5 class="card-title text-center">{% trans 'Work time' %}</h5>
+                        <p class="card-val card-text text-center font-weight-bold">{{ about_page_data.work_days }} {{ about_page_data.work_hours }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 mb-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center mb-2 card-icon"><i class="fas fa-file-invoice"></i></div>
+                        <h5 class="card-title text-center">{% trans 'Application form' %}</h5>
+                        <p class="card-text text-center font-weight-bold">
+                            <a href="{% url 'application_form' %}" class="btn btn-primary d-block card-action">{% trans 'Open' %}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 mb-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center mb-2 card-icon"><i class="fa fa-map"></i></div>
+                        <h5 class="card-title text-center">{% trans 'Address' %}</h5>
+                        <p class="card-val card-text text-center font-weight-bold">{{ about_page_data.address }}</p>
+                        <p class="card-text text-center font-weight-bold">{% trans 'Buses' %}: {{ about_page_data.public_transport }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="map">{{ about_page_data.location_map_link|safe }}</div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

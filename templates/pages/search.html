@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load i18n static app_tags %}
+
+
+{% block title %} {% trans 'Search results' %} {% endblock %}
+
+{% block js %}
+    <script>
+        setTimeout(function () {
+            $('.fa-search').click();
+        }, 500)
+    </script>
+{% endblock %}
+
+{% block content %}
+    <section class="search">
+        <div class="container py-3">
+            <div class="bg-white p-4">
+                <h1>{% trans 'Search results' %}</h1>
+                <div class="row g-3">
+
+                    {% for item in types %}
+
+                        <div class="col-md-12 p-3 search__card">
+                            <div class="search__card-title">
+                                <h3>{{ item }}</h3>
+                            </div>
+                            <div class="row gy-3 search__card-content">
+
+                                {% for obj in types|get_param:item %}
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <a href="{{ obj.link }}">{{ obj.title }}<i class="fal fa-external-link"></i></a>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+
+                    {% empty %}
+
+                        <h2>{% trans 'No items found' %}</h2>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

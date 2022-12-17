@@ -1,0 +1,1073 @@
+{% extends "base.html" %}
+{% load i18n static poll_tags %}
+
+
+{% block title %}{% trans "Home page" %}{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'custom/plugins/pignose/css/pignose.calendar.min.css' %}">
+
+<style>
+    .page-wrapper {
+        margin-top: 0 !important;
+    }
+
+    .event-two__image-inner {
+        position: relative;
+        overflow: hidden;
+        width: 200px;
+        height: 150px;
+    }
+
+    .event-two__image-inner>img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .event-two__time {
+        position: absolute;
+        bottom: 46%;
+        left: 50%;
+        -webkit-transform: translateX(-50%) translateY(50%) scale(1);
+        transform: translateX(-50%) translateY(140%) scale(1);
+        width: calc(100% - 40px);
+        text-align: center;
+        display: inline-block;
+        border-radius: 4px;
+        background-color: white;
+        -webkit-box-shadow: 3.5px 6.062px 20px 0px rgb(0 0 0 / 1%);
+        box-shadow: 3.5px 6.062px 20px 0px rgb(0 0 0 / 1%);
+        padding: 5px 0;
+        opacity: 1;
+        -webkit-transition: opacity .4s ease, -webkit-transform .4s ease;
+        transition: opacity .4s ease, -webkit-transform .4s ease;
+        transition: transform .4s ease, opacity .4s ease;
+        transition: transform .4s ease, opacity .4s ease, -webkit-transform .4s ease;
+        z-index: 10;
+        color: #fc9a06;
+    }
+
+    .event-two__single {
+        cursor: pointer;
+    }
+
+    .event-two__single+.event-two__single {
+        margin-top: 20px;
+    }
+
+    .links {
+        padding-top: 20px;
+    }
+
+    .links h3 {
+        text-align: center;
+        padding: 15px;
+        border-bottom: 1px solid #fc9a06;
+        color: #00102C;
+    }
+
+    .links__carousel {
+        position: relative;
+    }
+
+    .links__carousel .owl-nav {
+        /* position: absolute; */
+        /* top: -60px; */
+        /* right: 15px; */
+    }
+
+    .albums__slider .owl-nav button:hover,
+    .albums__slider .owl-nav button,
+    .links__carousel .owl-nav button:hover,
+    .links__carousel .owl-nav button {
+        outline: none !important;
+        border: none !important;
+        background-color: unset !important;
+        color: #00102C !important;
+    }
+
+    .links__carousel .owl-nav button i {
+        font-size: 20px;
+    }
+
+    .links__carousel .item a {
+        text-decoration: none;
+        color: black;
+        display: flex;
+        align-items: center;
+        transition: all .4s;
+        flex-direction: column;
+        height: 100%;
+        padding: 20px;
+        justify-content: center;
+    }
+
+    .links__carousel .item a img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .owl-stage {
+        display: flex;
+    }
+
+    .links__carousel .item {
+        background-color: #fff;
+        box-shadow: 1px 1px 6px #cdc8c8;
+        margin: 0;
+        height: 250px;
+    }
+
+    .links__carousel .item a span {
+        color: #00102C;
+        transition: all .4s;
+        text-align: center;
+        margin-top: 10px;
+        font-size: 1.2em;
+        font-weight: 600;
+    }
+
+    .links__carousel .item a:hover span {
+        color: #fc9a06;
+    }
+
+    .statistics-wrapper {
+        background-color: transparent;
+        padding: 0;
+    }
+
+    .statistics {
+        background-color: var(--main-color);
+        padding: 35px 0 45px 0;
+    }
+
+    .key-indicator {
+        transition: .5s;
+        border: 1px solid orange;
+        border-radius: .25rem;
+        cursor: default;
+    }
+
+    .key-indicator:hover {
+        box-shadow: 0 0 7px 0 #fc9a06;
+        transform: translateY(-10px);
+    }
+
+    .indicator-icon {
+        font-size: 3.75em;
+        color: #fc9a06;
+    }
+
+    .indicator-title {
+        color: #000;
+        font-size: 1.4em;
+        display: inline-block;
+        line-height: 1.3;
+        text-transform: uppercase;
+    }
+
+    .indicator-value {
+        font-size: 2.5em;
+        line-height: 1;
+        display: inline-block;
+        color: #0b5b80;
+    }
+
+    .right-menu li a {
+        color: #777;
+    }
+
+    .exhibhition-one__title {
+        margin-bottom: 0;
+        line-height: 1.3;
+    }
+
+    /*
+        .exhibhition-one {
+            background-color: transparent;
+        }
+
+        .exhibhition-one:before {
+            display: none;
+        }
+
+        .exhibhition-one.news .exhibhition-one .block-title__title {
+            color: #fff;
+        }
+        */
+
+    .exhibhition-one.news .exhibhition-one__single {
+        display: flex;
+        flex-flow: row wrap;
+        height: 100%;
+        width: 100%;
+        align-content: space-between;
+        align-items: flex-start;
+    }
+
+    .exhibhition-one.news .exhibhition-one__content {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 100%;
+        height: 50%;
+    }
+
+    .exhibhition-one.news .exhibhition-one__bottom {
+        margin-top: auto;
+    }
+
+
+    .exhibhition-one.news .exhibhition-one__image {
+        width: 100%;
+    }
+
+    .exhibhition-one.news .exhibhition-one__single {
+        height: 85%;
+    }
+
+    .useful-links {
+        background: #0b5b80;
+    }
+
+    .poll-result {
+        height: auto !important;
+    }
+
+    .poll-result .poll-answer {}
+
+    .poll-result .poll-answer-indicator {
+        height: 5px;
+        background: orange;
+    }
+
+    .poll {
+        border-right: 1px solid #fc9a06;
+    }
+
+    .three>.item {
+        border-right: 1px solid #fc9a06;
+    }
+
+    .three>.item:last-child {
+        border-right: none;
+    }
+
+    .album-img {
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .album-title {
+        position: absolute;
+        top: auto;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        text-align: center;
+        color: #fff;
+        line-height: 1;
+        background: #000000ad;
+        margin: 0;
+        padding: 10px 0;
+        font-size: 1.3em;
+    }
+
+    .album-title>a {
+        color: inherit;
+    }
+
+    @media (max-width: 992px) {
+        .links__carousel .item a {
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .links__carousel .item a span {
+            margin-top: 10px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .links h3 {
+            font-size: 21px;
+            text-align: unset;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .event-two__time {
+            position: absolute;
+            bottom: 9%;
+        }
+
+        .event-two__content {
+            padding-left: 0;
+            padding-top: 50px;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .statistics__num {
+            margin-top: 10px;
+            font-size: 50px;
+            font-weight: bold;
+            line-height: 1;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'custom/plugins/pignose/js/pignose.calendar.full.min.js' %}"></script>
+
+<script>
+
+    (function () {
+
+        const langs = {
+            "en": {
+                weeks: [
+                    "Sun",
+                    "Mon",
+                    "Tue",
+                    "Wed",
+                    "Thr",
+                    "Fri",
+                    "Sat",
+                ],
+                monthsLong: [
+                    'January',
+                    'February',
+                    'March',
+                    'April',
+                    'May',
+                    'June',
+                    'July',
+                    'August',
+                    'September',
+                    'October',
+                    'November',
+                    'December',
+                ],
+                months: [
+                    'Jan',
+                    'Feb',
+                    'Mar',
+                    'Apr',
+                    'May',
+                    'Jun',
+                    'Jul',
+                    'Aug',
+                    'Sep',
+                    'Oct',
+                    'Nov',
+                    'Dec',
+                ],
+            },
+            "ru": {
+                weeks: [
+                    'Вс',
+                    'Пн',
+                    'Вт',
+                    'Ср',
+                    'Чт',
+                    'Пт',
+                    'Сб',
+                ],
+                monthsLong: [
+                    'Январь',
+                    'Февраль',
+                    'Март',
+                    'Апрель',
+                    'Май',
+                    'Июнь',
+                    'Июль',
+                    'Август',
+                    'Сентябрь',
+                    'Октябрь',
+                    'Ноябрь',
+                    'Декабрь',
+                ],
+                months: [
+                    'Янв',
+                    'Фев',
+                    'Мар',
+                    'Апр',
+                    'Май',
+                    'Июн',
+                    'Июл',
+                    'Авг',
+                    'Сен',
+                    'Окт',
+                    'Ноя',
+                    'Дек',
+                ],
+            },
+            "uz": {
+                weeks: [
+                    'Ya',
+                    'Du',
+                    'Se',
+                    'Ch',
+                    'Pa',
+                    'Ju',
+                    'Sh',
+                ],
+                monthsLong: [
+                    'Yanvar',
+                    'Fevral',
+                    'Mart',
+                    'Aprel',
+                    'May',
+                    'Iyun',
+                    'Iyul',
+                    'Avgust',
+                    'Sentabr',
+                    'Oktabr',
+                    'Noyabr',
+                    'Dekabr',
+                ],
+                months: [
+                    'Yan',
+                    'Fev',
+                    'Mar',
+                    'Apr',
+                    'May',
+                    'Iyn',
+                    'Iyl',
+                    'Avg',
+                    'Sen',
+                    'Okt',
+                    'Noy',
+                    'Dek',
+                ],
+            },
+        }
+
+        $('#calendar').pignoseCalendar({
+
+            schedules: [
+                {% for date in calendar_event.dates %}
+                        {
+                name: 'offer',
+                date: '{{ date }}'
+            },
+            {% endfor %}
+                ],
+    scheduleOptions: {
+        colors: {
+            offer: '#2fabb7',
+                ad: '#5c6270'
+        }
+    },
+
+    weeks: langs[page_lang].weeks,
+        months: langs[page_lang].months,
+            monthsLong: langs[page_lang].monthsLong,
+                controls: langs[page_lang].controls,
+
+                    minDate: moment().subtract(1, 'months').startOf('month').format("YYYY-MM-DD"),
+                        maxDate: moment().add(1, 'months').endOf('month').format("YYYY-MM-DD"),
+                            week: 1,
+                                format: 'YYYY-MM-DD',
+
+                                    select: function(date, context) {
+                                        selectedDate = date[0].format('YYYY-MM-DD')
+                                        window.location = '{% url 'event_list' %}?date=' + selectedDate
+                                    }
+
+            });
+
+    $('.links__carousel').owlCarousel({
+        items: 3,
+        loop: true,
+        margin: 10,
+        dots: false,
+        nav: true,
+        vertical: true,
+        navText: ['<i class="fa fa-angle-double-left text-white"></i>', '<i class="fa fa-angle-double-right text-white"></i>'],
+
+{% comment %}
+        responsive: {
+        0: {
+            items: 1
+        },
+        600: {
+            items: 2
+        },
+        1000: {
+            items: 3
+        }
+    }
+{% endcomment %}
+
+            });
+
+    $('.albums__slider').owlCarousel({
+        items: 1,
+        loop: false,
+        margin: 10,
+        dots: false,
+        nav: true,
+        vertical: true,
+        navText: ['<i class="fa fa-angle-double-left text-white"></i>', '<i class="fa fa-angle-double-right text-white"></i>'],
+
+{% comment %}
+        responsive: {
+        0: {
+            items: 1
+        },
+        600: {
+            items: 2
+        },
+        1000: {
+            items: 3
+        }
+    }
+{% endcomment %}
+
+            });
+        }) ()
+
+</script>
+
+{% endblock %}
+
+
+{% block content %}
+<section class="slider-one">
+    <div class="slider-one__carousel owl-carousel owl-theme">
+
+        {% for banner in banners %}
+        <div class="item slider-one__slider-{{ banner.id }}" style="background-image: url({{ banner.image.url }});">
+            <div class="container text-center">
+                {% if banner.title %}
+                <h2 class="slider-one__title">{{ banner.title }}</h2>
+                {% endif %}
+                {% if banner.link %}
+                <a href="{{ banner.link }}" class="thm-btn slider-one__btn">{% trans 'Read more' %}</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+    <div class="slider-one__nav">
+        <a class="slider-one__nav-left slide-one__left-btn" href="#">
+            <i class="egypt-icon-right-angle"></i>
+            <span class="slider-one__nav-text">{% trans 'Previous' %}</span>
+        </a>
+        <a class="slider-one__nav-right slide-one__right-btn" href="#">
+            <i class="egypt-icon-left-angle"></i>
+            <span class="slider-one__nav-text">{% trans 'Next' %}</span>
+        </a>
+    </div>
+</section>
+
+<section class="exhibhition-one news">
+    <div class="container">
+        <div class="block-title text-center">
+            <h2 class="block-title__title">{% trans 'News' %}</h2>
+        </div>
+        <div class="row mb-5">
+
+            {% for post in posts %}
+            <div class="col-lg-4 col-md-6 col-12 mb-4">
+                <div class="exhibhition-one__single wow fadeInUp" data-wow-duration="1500ms">
+                    <div class="exhibhition-one__image">
+                        <div class="exhibhition-one__image-inner">
+                            <span class="exhibhition-one__image-border-1"></span>
+                            <span class="exhibhition-one__image-border-2"></span>
+                            <span class="exhibhition-one__image-border-3"></span>
+                            <span class="exhibhition-one__image-border-4"></span>
+                            <img src="{{ post.image.url }}" alt="{{ post.title}}" />
+                            <a href="{{ post.get_absolute_url }}" class="exhibhition-one__image-link">
+                                <i class="egypt-icon-arrow-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="exhibhition-one__content">
+                        <a href="{{ post.category.get_absolute_url }}" class="exhibhition-one__category">{{post.category.name }}</a>
+                        <h3 class="exhibhition-one__title">
+                            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                        </h3>
+                        <div class="exhibhition-one__bottom">
+                            <div class="exhibhition-one__bottom-left">
+                                <span></span>
+                                <span>{{ post.posting_date|date:"d / m / Y" }}</span>
+                            </div>
+                            <div class="exhibhition-one__bottom-right">
+                                <a href="{{ post.get_absolute_url }}" class="thm-btn exhibhition-one__btn">{% trans 'Read More' %}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <a href="{% url 'post_list' %}" class="thm-btn exhibhition-one__btn">{% trans 'More news' %}</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="collection-three">
+    <div class="container">
+        <div class="block-title text-center">
+            <h2 class="block-title__title">{% trans 'Key indicators' %}</h2>
+        </div>
+        <div class="row mb-5">
+
+            {% for indicator in key_indicators %}
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-3 wow fadeInDown">
+                <div>
+                    <div class="key-indicator d-flex flex-column text-center p-3">
+                        <i class="{{ indicator.icon }} indicator-icon mb-1"></i>
+                        <span class="indicator-value py-2">{{ indicator.value }}</span>
+                        <span class="indicator-title">{{ indicator.title }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+<section class="calendar exhibhition-one wow fadeInUp" data-wow-duration="1500ms"
+    style="visibility: visible; animation-duration: 1500ms; animation-name: fadeInUp;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="block-title text-center">
+                    <h2 class="block-title__title">{% trans 'Events calendar' %}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-5 col-md-12 col-12">
+                <div class="calendar" id="calendar"></div>
+            </div>
+            <div class="col-lg-7 col-md-12 col-12">
+                <div class="event container-fluid mb-4">
+                    <div class="row">
+                        <div class="col-md-6 col-6">
+                            <h4>{% trans 'Event' %}</h4>
+                        </div>
+                        <div class="col-md-6 col-6 text-right">
+                            <h4><a class="nav-link" href="{% url 'event_list' %}">{% trans 'All' %} <i
+                                        class="fa fa-angle-double-right" aria-hidden="true"></i></a></h4>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        {% for event in calendar_event.event %}
+                        <div class="item col-lg-6 col-md-12 col-12 d-none d-sm-block">
+                            <div class="exhibhition-one__single wow fadeInUp" data-wow-duration="1500ms">
+                                <div class="exhibhition-one__image">
+                                    <div class="exhibhition-one__image-inner">
+                                        <span class="exhibhition-one__image-border-1"></span>
+                                        <span class="exhibhition-one__image-border-2"></span>
+                                        <span class="exhibhition-one__image-border-3"></span>
+                                        <span class="exhibhition-one__image-border-4"></span>
+                                        <img src="{{ event.image.url }}" alt="{{ event.title }}" />
+                                        <a href="{{ event.get_absolute_url }}" class="exhibhition-one__image-link">
+                                            <i class="egypt-icon-arrow-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="exhibhition-one__content mt-3">
+                                    <h3 class="exhibhition-one__title">
+                                        <a href="{{ event.get_absolute_url }}">{{ event.title }}</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="col-12">
+                            <h4>{% trans 'No events found in selected date' %}</h4>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+                <div class="exhibition container-fluid">
+                    <div class="row">
+                        <div class="col-6">
+                            <h4>{% trans 'Exhibition' %}</h4>
+                        </div>
+                        <div class="col-6 text-right">
+                            <h4><a class="nav-link" href="{% url 'event_list' %}">{% trans 'All' %} <i
+                                        class="fa fa-angle-double-right" aria-hidden="true"></i></a></h4>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        {% for event in calendar_event.exhibition %}
+                        <div class="item col-lg-6 col-md-12 col-12 d-none d-sm-block">
+                            <div class="exhibhition-one__single wow fadeInUp" data-wow-duration="1500ms">
+                                <div class="exhibhition-one__image">
+                                    <div class="exhibhition-one__image-inner">
+                                        <span class="exhibhition-one__image-border-1"></span>
+                                        <span class="exhibhition-one__image-border-2"></span>
+                                        <span class="exhibhition-one__image-border-3"></span>
+                                        <span class="exhibhition-one__image-border-4"></span>
+                                        <img src="{{ event.image.url }}" alt="{{ event.title }}" />
+                                        <a href="{{ event.get_absolute_url }}" class="exhibhition-one__image-link">
+                                            <i class="egypt-icon-arrow-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="exhibhition-one__content mt-3">
+                                    <h3 class="exhibhition-one__title">
+                                        <a href="{{ event.get_absolute_url }}">{{ event.title }}</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="col-12">
+                            <h4>{% trans 'No exhibitions found in selected date' %}</h4>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="collection-three useful-links">
+    {% poll as p %}
+
+    <div class="container">
+
+        <div class="block-title text-center">
+
+            {% if p %}
+            <h2 class="block-title__title text-white">{% trans 'Polls, media and useful links' %}</h2>
+            {% else %}
+            <h2 class="block-title__title text-white">{% trans 'Media and useful links' %}</h2>
+            {% endif %}
+
+        </div>
+
+        <div class="row mb-5 three row-reverse">
+
+            {% if p %}
+
+            <div class="col-4 item poll">
+                <div class="p-3 bg-white" style="min-height: 250px;">
+                    {{ p }}
+                </div>
+            </div>
+
+            <div class="col-8 item news">
+
+                <div class="albums__slider owl-carousel owl-theme">
+
+                    {% for media in medias %}
+                    <div class="album">
+                        <img src="{{ media.main_image.url }}" alt="{{ media.title }}" class="album-img">
+                        <h3 class="album-title">
+                            <a href="{{ media.get_absolute_url }}">{{ media.title }}</a>
+                        </h3>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+            <div class="col-3 item useful-links-list">
+                <div>
+                    <div class="links__carousel owl-carousel owl-theme">
+
+
+
+                    </div>
+                </div>
+            </div>
+
+            {% else %}
+
+
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <div class="container">
+
+    <div class="col-12 item useful-links-list">
+
+        <div class="block-title text-center">
+
+            <h2 class="block-title__title text-white">{% trans 'Foydali havolalar' %}</h2>
+
+        </div>
+        <div>
+            <div class="links__carousel owl-carousel owl-theme">
+
+                {% for link in useful_links %}
+                <div class="item">
+                    <a href="{{ link.link }}">
+                        <img src="{{ link.image.url }}" alt="{{ link.title }}">
+                        <span>{{ link.title }}</span>
+                    </a>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+</div>  
+
+</section>
+
+<section class="event-two">
+    <div class="container pb-5">
+        <div class="row">
+            <div class="col-lg-5 d-flex">
+                <div class="my-auto w-100">
+                    <div class="event-two__block">
+                        <div class="block-title text-left">
+                            <p class="block-title__tag-line">{% trans 'Events' %}</p>
+                        </div>
+                        <ul class="list-unstyled event-two__list nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#current" role="tab">
+                                    <span class="number"></span>
+                                    {% trans 'Current' %}
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#upcoming" role="tab">
+                                    <span class="number"></span>
+                                    {% trans 'Upcoming' %}
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#past" role="tab">
+                                    <span class="number"></span>
+                                    {% trans 'Past' %}
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <a href="{% url 'event_list' %}" class="event-two__more-link">{% trans 'All upcoming events' %}<span>+</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="tab-content">
+                    <div class="event-two__main tab-pane animated fadeInRight " id="upcoming" role="tabpanel">
+
+                        {% for event in upcoming_events.upcoming %}
+                        <div class="event-two__single">
+                            <div class="event-two__image">
+                                <div class="event-two__time">
+                                    <i class="fa fa-clock-o"></i>
+                                    {{ event.start_date|date:"H:i" }}
+                                </div>
+                                <div class="event-two__image-inner">
+                                    <div class="event-two__price"><span>{% if event.price %}{{ event.price }} UZS{% else
+                                            %}{% trans 'No information' %}{% endif %}</span></div>
+                                    <img src="{{ event.image.url }}" alt="{{ event.title }}" />
+                                </div>
+                            </div>
+                            <div class="event-two__content">
+                                <div class="event-two__content-top">
+                                    <div class="event-two__date">
+                                        <div class="event-two__date-num">
+                                            {{ event.start_date|date:"d" }}
+                                        </div>
+                                        <div class="event-two__date-text">
+                                            <span>{{ event.start_date|date:"M Y" }}</span>
+                                            {{ event.start_date|date:"D" }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="event-two__title">
+                                    <a href="{{ event.get_absolute_url }}">{{ event.title }}</a>
+                                </h3>
+                                <p class="event-two__text d-sm-none">{{ event.description }}</p>
+                                <a href="{{ event.get_absolute_url }}" class="event-two__link"><span><i
+                                            class="fa fa-angle-right"></i>{% trans 'About' %}</span></a>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="event-two__single">
+                            <h3>{% trans 'Events not found' %}</h3>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                    <div class="event-two__main tab-pane animated fadeInRight show active" id="current" role="tabpanel">
+
+                        {% for event in upcoming_events.current %}
+                        <div class="event-two__single">
+                            <div class="event-two__image">
+                                <div class="event-two__time">
+                                    <i class="fa fa-clock-o"></i>
+                                    {{ event.start_date|date:"H:i" }}
+                                </div>
+                                <div class="event-two__image-inner">
+                                    <div class="event-two__price"><span>{% if event.price %}{{ event.price }}{% else
+                                            %}{% trans 'No information' %}{% endif %}</span></div>
+                                    <img src="{{ event.image.url }}" alt="{{ event.title }}" />
+                                </div>
+                            </div>
+                            <div class="event-two__content">
+                                <div class="event-two__content-top">
+                                    <div class="event-two__date">
+                                        <div class="event-two__date-num">
+                                            {{ event.start_date|date:"d" }}
+                                        </div>
+                                        <div class="event-two__date-text">
+                                            <span>{{ event.start_date|date:"M Y" }}</span>
+                                            {{ event.start_date|date:"D" }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="event-two__title">
+                                    <a href="{{ event.get_absolute_url }}">{{ event.title }}</a>
+                                </h3>
+                                <p class="event-two__text d-sm-none">{{ event.description }}</p>
+                                <a href="{{ event.get_absolute_url }}" class="event-two__link"><span><i
+                                            class="fa fa-angle-right"></i>{% trans 'About' %}</span></a>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="event-two__single">
+                            <h3>{% trans 'Events not found' %}</h3>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                    <div class="event-two__main tab-pane animated fadeInRight " id="past" role="tabpanel">
+
+                        {% for event in upcoming_events.past %}
+                        <div class="event-two__single">
+                            <div class="event-two__image">
+                                <div class="event-two__time">
+                                    <i class="fa fa-clock-o"></i>
+                                    {{ event.start_date|date:"H:i" }}
+                                </div>
+                                <div class="event-two__image-inner">
+                                    <div class="event-two__price"><span>{% if event.price %}{{ event.price }}{% else
+                                            %}{% trans 'No information' %}{% endif %}</span></div>
+                                    <img src="{{ event.image.url }}" alt="{{ event.title }}" />
+                                </div>
+                            </div>
+                            <div class="event-two__content">
+                                <div class="event-two__content-top">
+                                    <div class="event-two__date">
+                                        <div class="event-two__date-num">
+                                            {{ event.start_date|date:"d" }}
+                                        </div>
+                                        <div class="event-two__date-text">
+                                            <span>{{ event.start_date|date:"M Y" }}</span>
+                                            {{ event.start_date|date:"D" }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="event-two__title">
+                                    <a href="{{ event.get_absolute_url }}">{{ event.title }}</a>
+                                </h3>
+                                <p class="event-two__text d-sm-none">{{ event.description }}</p>
+                                <a href="{{ event.get_absolute_url }}" class="event-two__link"><span><i
+                                            class="fa fa-angle-right"></i>{% trans 'About' %}</span></a>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="event-two__single">
+                            <h3>{% trans 'Events not found' %}</h3>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class='statistics'>
+    <div class='container'>
+        <div class="statistics__wrapper">
+            <div class="row">
+                <div class="col-12">
+                    <div>
+                        <h1 class="mb-5">{% trans 'Key indicators' %}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-12 mb-md-4 accepted wow zoomInDown">
+                    <div class="statistics__icon"><i class="fa fa-download"></i></div>
+                    <div class="statistics__text">{% trans 'Accepted' %}</div>
+                    <div class="statistics__num">{{ statistic_data.accepted }}</div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-12 mb-md-4 developed wow zoomInDown">
+                    <div class="statistics__icon"><i class="fa fa-sync"></i></div>
+                    <div class="statistics__text">{% trans 'On process' %}</div>
+                    <div class="statistics__num">{{ statistic_data.on_process }}</div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-12 mb-md-4 done wow zoomInDown">
+                    <div class="statistics__icon"><i class="fa fa-check"></i></div>
+                    <div class="statistics__text">{% trans 'Solved' %}</div>
+                    <div class="statistics__num">{{ statistic_data.solved }}</div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-12 mb-md-4 reject wow zoomInDown">
+                    <div class="statistics__icon"><i class="fa fa-ban"></i></div>
+                    <div class="statistics__text">{% trans 'Non acceptable' %}</div>
+                    <div class="statistics__num">{{ statistic_data.not_solved }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="collection-three">
+    <div class="container">
+        <div class="block-title text-center">
+            <h2 class="block-title__title">{% trans 'Festivals and competitions' %}</h2>
+        </div>
+        <div class="row masonary-layout">
+
+            {% for festival in festivals %}
+            <div class="col-lg-4 col-md-6 col-sm-12 masonary-item wow fadeInUp" data-wow-duration="1500ms"
+                data-wow-delay="000ms">
+                <div class="collection-three__single">
+                    <img src="{{ festival.albumimage_set.all.0.image.url }}" alt="{{ festival.title }}" />
+                    <div class="collection-three__content">
+                        <a href="{{ festival.get_absolute_url }}" class="collection-three__link"><span
+                                class="fa fa-eye"></span></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        <div class="text-center">
+            <a href="{% url 'album_list' %}" class="collection-three__more-link">
+                <span><i class="fa fa-angle-right"></i>{% trans 'View all festivals' %}</span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

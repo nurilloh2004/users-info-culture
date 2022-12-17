@@ -1,0 +1,99 @@
+{% load i18n static %}
+{% get_available_languages as languages %}
+
+<section class="topbar-one">
+    <div class="container">
+        <div class="inner-container">
+            <div class="topbar-one__left">
+                <a href="tel: {{ site_settings.phone_number }}" class="topbar-one__link">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                    <span>{{ site_settings.phone_number }}</span>
+                </a>
+            </div>
+            <ul class="topbar-one__right list-unstyled">
+                <li>
+                    <div class="topbar-one__social">
+                        <a href="{{ site_settings.facebook_link }}"><i class="fa fa-facebook"></i></a>
+                        <a href="{{ site_settings.instagram_link }}"><i class="fa fa-instagram"></i></a>
+                        <a href="{{ site_settings.twitter_link }}"><i class="fa fa-twitter"></i></a>
+                        <a href="{{ site_settings.telegram_link }}"><i class="fa fa-telegram"></i></a>
+                        <a href="{{ site_settings.youtube_link }}"><i class="fa fa-youtube"></i></a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="topbar-one__search search-popup__toggler">
+                        <i class="egypt-icon-search"></i>
+                    </a>
+                </li>
+                <li>
+                    <select class="selectpicker" id="language-selection-dropdown">
+                        {% for language, title in languages %}
+                            <option value="{{ language }}" {% if language == request.LANGUAGE_CODE %}selected{% endif %}>{{ title }}</option>
+                        {% endfor %}
+                    </select>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<header class="site-header site-header__header-one">
+    <nav class="navbar navbar-expand-lg navbar-light header-navigation stricky">
+        <div class="container clearfix">
+            <div class="logo-box">
+                <a class="navbar-brand" href="{% url 'home_template_view' %}">
+                    <img src="{{ site_settings.logo.url }}" class="main-logo header--logo-img" alt="{% trans 'Logo of Ministry of Culture of the Republic Uzbekistan' %}">
+                    <div class="logo-text">
+                        <h1 class="text-white">{% blocktrans %}Ministry of Culture of the Republic<br>of Uzbekistan{% endblocktrans %}</h1>
+                        <p>{% trans 'Official website' %}</p>
+                    </div>
+                </a>
+            </div>
+            <div class="main-navigation">
+
+                <ul class=" navigation-box @@extra_class">
+
+                    {% for menu in menus_in_header %}
+                        <li class="{% if menu.link == request.get_full_path %}current{% endif %}">
+                            <a href="{% if menu.link %}{{ menu.link }}{% else %}#{% endif %}">{{ menu.name }}</a>
+
+                            {% if menu.children.count %}
+                                <ul class="submenu">
+
+                                    {% for child_menu in menu.children.all %}
+                                        <li class="{% if child_menu.link == request.get_full_path %}current{% endif %}">
+                                            <a href="{% if child_menu.link %}{{ child_menu.link }}{% else %}#{% endif %}">{{ child_menu.name }}</a>
+
+                                            {% if child_menu.children.count %}
+                                                <ul class="submenu">
+
+                                                    {% for sub_child_menu in child_menu.children.all %}
+                                                        <li class="{% if child_menu.link == request.get_full_path %}current{% endif %}">
+                                                            <a href="{% if sub_child_menu.link %}{{ sub_child_menu.link }}{% else %}#{% endif %}">{{ sub_child_menu.name }}</a>
+                                                        </li>
+                                                    {% endfor %}
+
+                                                </ul>
+                                            {% endif %}
+
+                                        </li>
+                                    {% endfor %}
+
+                                </ul>
+                            {% endif %}
+
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+            <div class="right-side-box">
+                <a href="index.html#" class="site-header__sidemenu-nav side-menu__toggler">
+                    <span class="site-header__sidemenu-nav-line"></span>
+                    <span class="site-header__sidemenu-nav-line"></span>
+                    <span class="site-header__sidemenu-nav-line"></span>
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="preloader"><span style="background-image: url('{{ site_settings.logo.url }}')"></span></div>

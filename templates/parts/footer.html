@@ -1,0 +1,173 @@
+{% load static i18n mptt_tags %}
+
+<footer class="page-footer font-small text-white" style="background-color: #0b5b80;">
+
+    <div style="background-color: #fc9a06;">
+        <div class="container">
+
+            <div class="row py-4 d-flex align-items-center">
+
+                <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                    <h5 class="mb-0">{% trans 'Get connected with us on social networks!' %}</h5>
+                </div>
+
+                <div class="col-md-6 col-lg-7 text-center text-md-right social_icon">
+
+                    {% if site_settings.facebook_link %}
+                        <a href="{{ site_settings.facebook_link }}" class="fb-ic">
+                            <i class="fa fa-facebook mr-4"> </i>
+                        </a>
+                    {% endif %}
+
+                    {% if site_settings.instagram_link %}
+                        <a href="{{ site_settings.instagram_link }}" class="tw-ic">
+                            <i class="fa fa-instagram mr-4"> </i>
+                        </a>
+                    {% endif %}
+
+                    {% if site_settings.twitter_link %}
+                        <a href="{{ site_settings.twitter_link }}" class="gplus-ic">
+                            <i class="fa fa-twitter mr-4"> </i>
+                        </a>
+                    {% endif %}
+
+                    {% if site_settings.telegram_link %}
+                        <a href="{{ site_settings.telegram_link }}" class="li-ic">
+                            <i class="fa fa-telegram mr-4"> </i>
+                        </a>
+                    {% endif %}
+
+                    {% if site_settings.youtube_link %}
+                        <a href="{{ site_settings.youtube_link }}" class="li-ic">
+                            <i class="fa fa-youtube mr-4"> </i>
+                        </a>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container text-center text-md-left mt-5">
+
+        <div class="row mt-3 colum-link">
+
+            <div class="col-md-6 col-lg-3 col-xl-3 mx-auto mb-4">
+
+                <h6 class="text-uppercase font-weight-bold">{% trans "Ministry of Culture of the Republic of Uzbekistan" %}</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <div>{{ site_settings.event_contact_info|safe }}</div>
+
+            </div>
+
+            <div class="col-md-6 col-lg-3 col-xl-3">
+
+                <h6 class="text-uppercase font-weight-bold">{% trans 'Our address' %}</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                {% if site_settings.address %}
+                    <p><i class="fa fa-home mr-3"></i>{{ site_settings.address }}</p>
+                {% endif %}
+
+            </div>
+
+            <div class="col-md-6 col-lg-3 col-xl-3">
+                <h6 class="text-uppercase font-weight-bold">{% trans 'Phone number and fax' %}</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+
+                {% if site_settings.email %}
+                    <p>
+                        <i class="fa fa-envelope mr-3"></i>
+                        <a href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a>
+                    </p>
+                {% endif %}
+                {% if site_settings.tel %}
+                    <p>
+                        <i class="fa fa-phone mr-3"></i>
+                        <a href="tel:{{ site_settings.tel }}">{{ site_settings.tel }}</a>
+                    </p>
+                {% endif %}
+            </div>
+
+            <div class="col-md-6 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                <h6 class="text-uppercase font-weight-bold">{% trans 'Visitor statistics' %}</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                {% comment %}<p>
+                    <!-- Yandex.Metrika counter -->
+                    <script type="text/javascript" >
+                       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+                       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+                       ym(79072360, "init", {
+                            clickmap:true,
+                            trackLinks:true,
+                            accurateTrackBounce:true,
+                            webvisor:true
+                       });
+                    </script>
+                    <noscript><div><img src="https://mc.yandex.ru/watch/79072360" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+                    <!-- /Yandex.Metrika counter -->
+                    <a href="#">
+                        <img src="{% static 'images/footer_counter_1.png' %}" alt="Visitor stats">
+                    </a>
+                </p> {% endcomment %}
+
+<!-- Yandex.Metrika informer -->
+<a href="https://metrika.yandex.com/stat/?id=79072360&amp;from=informer" class="yandex-counter"
+target="_blank" rel="nofollow"><img src="https://informer.yandex.ru/informer/79072360/3_1_FFFFFFFF_EFEFEFFF_0_pageviews"
+style="width:88px; height:31px; border:0;" alt="Yandex.Metrica" title="Yandex.Metrica: data for today (page views, visits and unique users)" class="ym-advanced-informer" data-cid="79072360" data-lang="en" /></a>
+<!-- /Yandex.Metrika informer -->
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(79072360, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/79072360" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+                <p>{% trans 'Found typo? Select it and press CTRL+Enter' %}</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="footer-copyright text-center py-3 colum-link" style="background-color: #041c27;">
+        <span>{% trans 'Site was created by' %}</span>
+        <a href="https://datasite.uz"><span>Datasite Technology</span></a>
+    </div>
+
+</footer>
+
+<style>
+    .social_icon a {
+        color: #fff;
+    }
+
+    .social_icon i {
+        font-size: larger !important;
+    }
+
+    .colum-link a {
+        color: #fff;
+    }
+
+    .colum-link a:hover {
+        color: #fc9a06;
+    }
+
+    .colum-link hr {
+        border: solid .3px #fc9a06;
+    }
+</style>

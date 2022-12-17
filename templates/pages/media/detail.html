@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+
+{% block title %}{{ media.title }}{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'custom/plugins/jquery.fancybox/jquery.fancybox.min.css' %}">
+
+    <style>
+        .play__video {
+            width: 100%;
+            height: 100%;
+        }
+
+        .play__video::before {
+            position: absolute;
+            z-index: 1;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #fff;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--second-color);
+            padding: 17.5px 21px;
+            box-shadow: 0px 0px 5px 4px #ffffff;
+        }
+
+        .play__video::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--main-color);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            transform-origin: center;
+            animation: burn 3s linear infinite;
+        }
+
+        audio {
+            width: 100%;
+        }
+
+        .no_hover {
+            display: block;
+            height: 210px;
+        }
+        .no_hover > img {
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        @keyframes burn {
+            0% {
+                width: 10px;
+                height: 10px;
+                opacity: 1;
+            }
+            25% {
+                width: 25px;
+                height: 25px;
+                opacity: .8;
+            }
+            50% {
+                width: 50px;
+                height: 50px;
+                opacity: .6;
+            }
+            75% {
+                width: 75px;
+                height: 75px;
+                opacity: .4;
+            }
+            100% {
+                width: 85px;
+                height: 85px;
+                opacity: .0;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .media-title {
+                margin-top: 10px;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'custom/plugins/jquery.fancybox/jquery.fancybox.min.js' %}"></script>
+
+    <script>
+        $('img.fancybox').wrap(function () {
+            return "<a href='" + this.attributes['src'].value + "' data-fancybox='gallery-1'></a>";
+        });
+        $('img.fancybox-gallery-item').wrap(function () {
+            return "<a class='no_hover' href='" + this.attributes['src'].value + "' data-fancybox='gallery-2'></a>";
+        });
+        $('img.youtube-thumb').wrap(function () {
+            return "<a href='" + this.attributes['data-video-url'].value + "' class='position-relative fa fa-play play__video d-block' data-fancybox='gallery-3'></a>";
+        });
+        $('video.youtube-thumb').wrap(function () {
+            return "<a href='" + this.attributes['data-video-url'].value + "' class='position-relative fa fa-play play__video d-block' data-fancybox='gallery-3'></a>";
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-12 col-12">
+                <img src="{{ media.main_image.url }}" alt="{{ media.title }}" class="fancybox text-center img-fluid" style="border-radius: 4px"/>
+            </div>
+            <div class="col-lg-8 col-md-8 col-12">
+                <h3 class="mb-3">{{ media.title }}</h3>
+                <h6 style="color: rgba(169,169,169,0.4); margin: 0;"><i class="fa fa-tag"></i> {{ media.get_category_display }} || <i class="fa fa-calendar"></i> {{ media.time_added|date:"d-M-Y H:i" }} || <i class="fa fa-eye"></i> {{ media.view_count }}</h6>
+                <div><p>{{ media.description|safe }}</p></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <hr />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                {% if media.category == 'video' %}
+                    <div class="video">
+                        <div class="row">
+                            {% for sub_media in media.mediaobject_set.all %}
+                                {% if sub_media.video_file %}
+                                    <div class="col-lg-4 col-md-6 col-12">
+                                        <div>
+                                            <video src="{{ sub_media.video_file.url }}"
+                                                 data-video-url="{{ sub_media.video_file.url }}"
+                                                 class="youtube-thumb img-fluid" data-is-video="true" style="border-radius: 4px"></video>
+                                        </div>
+                                    </div>
+                                {% elif sub_media.youtube_video_id %}
+                                    <div class="col-lg-4 col-md-6 col-12">
+                                        <img src="https://img.youtube.com/vi/{{ sub_media.youtube_video_id }}/0.jpg"
+                                             data-video-url="https://youtube.com/embed/{{ sub_media.youtube_video_id }}"
+                                             alt="" class="youtube-thumb" style="border-radius: 4px">
+
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% elif media.category == 'audio' %}
+                    <div class="audio">
+                        <div class="row">
+                            {% for sub_media in media.mediaobject_set.all %}
+
+                                {% if sub_media.audio_file or sub_media.audio_link %}
+                                    <div class="col-lg-4 col-md-6 col-12">
+                                        <audio controls="controls" loop controlsList="nodownload">
+                                            <source src="{% if sub_media.audio_file.url %} {{ sub_media.audio_file.url }} {% elif sub_media.audio_link %} {{ sub_media.audio_link }} {% endif %}" type="audio/mp3">
+                                        </audio>
+
+                                        {% if sub_media.audio_artist or sub_media.audio_release_date or sub_media.audio_genre %}
+                                            {% if sub_media.audio_artist %}
+                                                <div>
+                                                    <div><i class="mr-2 fa fa-user"></i> {{ sub_media.audio_artist }}</div>
+                                                </div>
+                                            {% endif %}
+                                            {% if sub_media.audio_release_date %}
+                                                <div>
+                                                    <div><i class="mr-2 fa fa-calendar"></i>{{ sub_media.audio_release_date }}</div>
+                                                </div>
+                                            {% endif %}
+                                            {% if sub_media.audio_genre %}
+                                                <div>
+                                                    <div><i class="mr-2 fa fa-tags"></i>{{ sub_media.audio_genre }}</div>
+                                                </div>
+                                            {% endif %}
+                                        {% else %}
+                                            <h5 class="ml-2">{% trans 'No data about audio' %}</h5>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% elif media.category == 'photo' %}
+                    <div class="photo">
+                        <div class="row">
+                            {% for sub_media in media.mediaobject_set.all %}
+                                <div class="col-lg-4 col-md-6 col-12 my-2">
+                                    <img src="{{ sub_media.image.url }}"
+                                         alt="{{ media.title }}"
+                                         class="fancybox-gallery-item" style="border-radius: 4px"/>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

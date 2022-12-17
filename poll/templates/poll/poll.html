@@ -1,0 +1,125 @@
+{% extends "poll/base.html" %}
+{% load i18n static %}
+
+
+{% block poll_script %}
+    <script type="text/javascript">
+        var vote_url = "{% url 'poll:vote' poll.pk %}";
+        var result_url = "{% url 'poll:result' poll.pk %}";
+
+        document.addEventListener('DOMContentLoaded', function () {
+            function showResults() {
+                $.get(result_url, function (data) {
+                    $("#poll-container").html(data);
+                });
+            }
+
+            $("#poll-send").click(function () {
+                var item = $('#poll-form input[name=item]:checked').val();
+                if (typeof item === "undefined") {
+                    alert(message.please_choose_an_answer);
+                    return false;
+                }
+                $.get(vote_url, {item: item}, function () {
+                    showResults();
+                });
+                return false;
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block poll_stylesheet %}
+    <style type="text/css">
+
+        .poll-container {
+
+        }
+
+        .poll-container .poll-style {
+
+        }
+
+        .poll-items {
+
+        }
+
+        .poll-result {
+            height: auto;
+        }
+
+        .poll-items ul {
+
+        }
+
+        .poll-items ul li .poll-item-label {
+            line-height: 2;
+            margin: 0;
+            vertical-align: middle;
+        }
+
+        .poll-items input[type=checkbox],
+        .poll-items input[type=radio] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid orange;
+            vertical-align: middle;
+            position: relative;
+            border-radius: 3px;
+        }
+
+        .poll-items input[type=checkbox]:checked,
+        .poll-items input[type=radio]:checked {
+            border-color: #fc9a06;
+            padding: 5px;
+            transition: .2s;
+        }
+
+        .poll-items input[type=checkbox]:checked::after,
+        .poll-items input[type=radio]:checked::after {
+            content: "";
+            display: inline-block;
+            transition: .2s;
+            background: #0b5b80;
+            width: 12px;
+            height: 12px;
+            top: 2px;
+            left: 2px;
+            position: absolute;
+            border-radius: 2px;
+            opacity: 1;
+        }
+
+    </style>
+{% endblock %}
+
+
+<div class="poll-container">
+    {% block poll_content %}
+        <form action="" method="GET" id="poll-form">
+
+            <div class="poll-title">
+                <h3>{{ poll.question }}</h3>
+            </div>
+
+            <div class="poll-items">
+                <ul class="list-unstyled">
+
+                    {% for item in items %}
+                        <li>
+                            <input type="radio" name="item" id="item-{{ item.id }}" value="{{ item.id }}"/>
+                            <label for="item-{{ item.id }}" class="poll-item-label">{{ item.value }}</label>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+
+            <div class="poll-submit">
+                <input type="button" class="poll-btn-vote thm-btn exhibhition-one__btn" id="poll-send" value="{% trans 'Vote' %}" />
+            </div>
+
+        </form>
+    {% endblock %}
+</div>

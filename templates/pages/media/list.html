@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+
+{% block title %}{% trans 'Media list' %}{% endblock %}
+
+{% block css %}
+    <style>
+        .exhibhition-one__bottom-left span:nth-child(2):before {
+            display: none;
+            content: "";
+        }
+
+        .exhibhition-one__bottom-left {
+            flex-direction: row;
+        }
+
+        .exhibhition-one__bottom-left span:nth-child(2) {
+            margin-top: 4px;
+        }
+
+        span.event-icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            background: orange;
+            color: #fff;
+            padding: 10px 20px;
+        }
+   </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <div class="title">
+                    <h2>{% trans 'Media' %}</h2>
+                </div>
+            </div>
+        </div>
+
+        {% if medias %}
+            <div class="row masonary-layout">
+
+                {% for media in medias %}
+
+                    <div class="col-lg-4 col-md-6 col-12 masonary-item post__card mb-3">
+                        <div class="exhibhition-one__single wow fadeInUp" data-wow-duration="1500ms">
+                            <div class="exhibhition-one__image">
+                                <div class="exhibhition-one__image-inner">
+                                    <span class="event-icon">
+                                        {% if media.category == 'audio' %}
+                                            <i class="fa fa-volume-up"></i>
+                                        {% elif media.category == 'video' %}
+                                            <i class="fa fa-video"></i>
+                                        {% elif media.category == 'photo' %}
+                                            <i class="fa fa-photo"></i>
+                                        {% endif %}
+                                    </span>
+                                    <span class="exhibhition-one__image-border-1"></span>
+                                    <span class="exhibhition-one__image-border-2"></span>
+                                    <span class="exhibhition-one__image-border-3"></span>
+                                    <span class="exhibhition-one__image-border-4"></span>
+                                    <img src="{{ media.main_image.url }}" alt="{{ media.title }}" class="img-fluid">
+                                    <a href="{{ media.get_absolute_url }}" class="exhibhition-one__image-link">
+                                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="exhibhition-one__content">
+                                <a href="" class="exhibhition-one__category"></a>
+                                <h3 class="exhibhition-one__title">
+                                    <a href="{{ media.get_absolute_url }}">{{ media.title }}</a>
+                                </h3>
+                                <div class="exhibhition-one__bottom">
+                                    <div class="exhibhition-one__bottom-left">
+                                        <span>
+                                            <i class="fa fa-eye mr-2" aria-hidden="true"></i>
+                                        </span>
+                                        <span>{{ media.view_count }}</span>
+                                    </div>
+                                    <div class="exhibhition-one__bottom-right">
+                                        <a href="{{ media.get_absolute_url }}" class="thm-btn exhibhition-one__btn">{% trans 'Read More' %}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+        {% else %}
+            <div class="row">
+
+                <div class="col-12 text-center">
+                    <i class="far fa-book-reader mb-4" style="font-size: 5em; color: #0B5B80;"></i>
+                    <h4 class="text-uppercase" style="font-size: 2em; color:  var(--main-color);">{% trans 'No media found' %}</h4>
+                </div>
+
+            </div>
+        {% endif %}
+
+    </div>
+{% endblock %}

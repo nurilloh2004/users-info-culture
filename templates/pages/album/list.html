@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+
+{% block title %}{% trans 'Albums' %}{% endblock %}
+
+{% block css %}
+    <style>
+        .exhibhition-one__bottom-left span:nth-child(2):before {
+            display: none;
+            content: "";
+        }
+
+        .exhibhition-one__bottom-left {
+            flex-direction: row;
+        }
+
+        .exhibhition-one__bottom-left span:nth-child(2) {
+            margin-top: 4px;
+        }
+
+        span.event-icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            background: orange;
+            color: #fff;
+            padding: 10px 20px;
+        }
+   </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <div class="title">
+                    <h2>{% trans 'Festivals and competitions' %}</h2>
+                </div>
+            </div>
+        </div>
+
+        {% if albums %}
+            <div class="row masonary-layout">
+
+                {% for album in albums %}
+
+                    <div class="col-lg-4 col-md-6 col-sm-12 masonary-item wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="000ms">
+                        <div class="collection-three__single">
+                            <img src="{{ album.albumimage_set.all.0.image.url }}" alt="{{ album.title }}"/>
+                            <div class="collection-three__content">
+                                <a href="{{ album.get_absolute_url }}" class="collection-three__link"><span class="fa fa-eye"></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+        {% else %}
+            <div class="row">
+
+                <div class="col-12 text-center">
+                    <i class="far fa-book-reader mb-4" style="font-size: 5em; color: #0B5B80;"></i>
+                    <h4 class="text-uppercase" style="font-size: 2em; color:  var(--main-color);">{% trans 'No festivals found' %}</h4>
+                </div>
+
+            </div>
+        {% endif %}
+
+    </div>
+{% endblock %}
+
+
+
+{% comment %}
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans 'Albums' %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="row masonary-layout">
+
+            {% for album in albums %}
+                <div class="col-lg-4 col-md-6 col-sm-12 masonary-item wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="000ms">
+                    <div class="collection-three__single">
+                        <img src="{{ album.albumimage_set.all.0.image.url }}" alt="{{ album.title }}"/>
+                        <div class="collection-three__content">
+                            <a href="{{ album.get_absolute_url }}" class="collection-three__link"><span class="fa fa-eye"></span></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+{% endblock %}
+{% endcomment %}

@@ -1,0 +1,145 @@
+{% load i18n static %}
+
+<div class="side-menu__block">
+    <div class="side-menu__block-overlay custom-cursor__overlay">
+        <div class="cursor"></div>
+        <div class="cursor-follower"></div>
+    </div>
+    <div class="side-menu__block-inner ">
+
+        <a class="navbar-brand" href="{% url 'home_template_view' %}">
+            <img src="{{ site_settings.logo.url }}" class="main-logo header--logo-img" alt="{% trans 'Logo of Ministry of Culture of the Republic Uzbekistan' %}">
+            <div class="logo-text">
+                <h1>{% blocktrans %}Ministry of Culture of the Republic of Uzbekistan{% endblocktrans %}</h1>
+                <p>{% trans 'Official website' %}</p>
+            </div>
+        </a>
+
+        <hr class="side-menu__block-line"/>
+
+        <div>
+            <div class="side-menu__block-close">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </div>
+
+            <ul class="right-menu">
+                {% for menu in menus_all %}
+                    <li class="{% if menu.link == request.build_absolute_url %}current{% endif %}">
+
+                        <a {% if menu.link %}href="{{ menu.link }}"{% endif %} class="collapse-menu-item {% if menu.children.count %}has-child{% else %}has-no-child{% endif %}">{{ menu.name }}</a>
+
+                        {% if menu.children.count %}
+                            <ul class="submenu pl-3">
+
+                                {% for child_menu in menu.children.all %}
+                                    <li class="{% if child_menu.link == request.build_absolute_url %}current{% endif %}">
+
+                                        <a {% if child_menu.link %}href="{{ child_menu.link }}"{% endif %} class="collapse-menu-item {% if child_menu.children.count %}has-child{% else %}has-no-child{% endif %}">{{ child_menu.name }}</a>
+
+                                        {% for sub_child_menu in child_menu.children.all %}
+                                            <ul class="submenu pl-5">
+                                                <li class="{% if sub_child_menu.link == request.build_absolute_url %}current{% endif %}">
+
+                                                    <a {% if sub_child_menu.link %}href="{{ sub_child_menu.link }}"{% endif %} class="collapse-menu-item {% if sub_child_menu.children.count %}has-child{% else %}has-no-child{% endif %}">{{ sub_child_menu.name }}</a>
+                                                </li>
+                                            </ul>
+                                        {% endfor %}
+
+                                    </li>
+                                {% endfor %}
+
+                            </ul>
+                        {% endif %}
+
+                    </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+
+        <hr class="side-menu__block-line"/>
+
+        <div class="side-menu__block-contact mt-3">
+            <h3 class="side-menu__block__title">{% trans 'Contact Us' %}</h3>
+            <ul class="side-menu__block-contact__list">
+                <li class="side-menu__block-contact__list-item">
+                    <i class="fa fa-map-marker"></i> {{ site_settings.address }}
+                </li>
+                <li class="side-menu__block-contact__list-item">
+                    <i class="fa fa-phone"></i>
+                    <a href="tel:{{ site_settings.tel }}">{{ site_settings.tel }}</a>
+                </li>
+                <li class="side-menu__block-contact__list-item">
+                    <i class="fa fa-envelope"></i>
+                    <a href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a>
+                </li>
+                <li class="side-menu__block-contact__list-item">
+                    <i class="fa fa-clock-o"></i> {% trans 'Work time' %}:<br />
+                    {{ site_settings.work_hours }}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="search-popup">
+    <div class="search-popup__overlay custom-cursor__overlay">
+        <div class="cursor"></div>
+        <div class="cursor-follower"></div>
+    </div>
+    <div class="search-popup__inner">
+        <form action="#" class="search-popup__form" method="get">
+            <input type="text" name="search" placeholder="{% trans 'Type here to search...' %}">
+            <button type="submit"><i class="egypt-icon-search"></i></button>
+        </form>
+    </div>
+</div>
+
+<a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="egypt-icon-arrow-2"></i></a>
+
+<aside class="aside">
+    <ul>
+        <li class="aside_li" id="plsfont">
+            A+
+            <div>{% trans 'Increase font size' %}</div>
+        </li>
+        <li class="aside_li" id="resfont">
+            Aa
+            <div>{% trans 'Default font size' %}</div>
+        </li>
+        <li class="aside_li" id="minfont">
+            A-
+            <div>{% trans 'Decrease font size' %}</div>
+        </li>
+        <li class="aside_li" id="audio">
+            <i class="fa fa-volume-up"></i>
+            <div>{% trans 'Sound assistance' %}</div>
+        </li>
+        <li class="aside_li" id="blackmode">
+            <i class="fa fa-eye"></i>
+            <div>{% trans 'Greyscale mode' %}</div>
+        </li>
+    </ul>
+</aside>
+
+<div class="error-text">
+    <div class="error-text__wrapper">
+        <div class="error-text__header">
+            <h5>{% trans 'Describe found typo' %}</h5>
+            <i class="fa fa-times closemodal"></i>
+        </div>
+        <hr>
+        <div class="error-text__form">
+            <form class="form__typo">
+                <input type="text" hidden="true" name="page" class="error__href">
+                <textarea name="text" class="error__value" required="" readonly=""></textarea>
+                <textarea name="comment" placeholder="{% trans 'Description (not required)' %}"></textarea>
+                <hr>
+                <div class="d-flex align-content-center align-items-center justify-content-end">
+                    <i class="fa fa-circle-notch fa-spin spinner fade d-none mr-2" style="width: 16px; height: 16px;"></i>
+                    <button>{% trans 'Send' %}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

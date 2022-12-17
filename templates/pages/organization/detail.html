@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+{% load i18n static app_tags %}
+
+
+{% block title %}{{ organization.title }}{% endblock %}
+
+{% block css %}
+    <link href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'custom/plugins/jquery.fancybox/jquery.fancybox.min.css' %}">
+
+    <style>
+        .organization-detail__title {
+            font-size: 30px;
+            color: var(--main-color);
+        }
+        .organization-detail__wrapper > div {
+            display: flex;
+            color: var(--main-color);
+        }
+
+        .organization-detail__wrapper > div > p {
+            word-break: break-word;
+        }
+
+        .organization-detail__wrapper > div > p > a {
+            color: var(--main-color);
+            font-weight: 600;
+            padding: 5px;
+            background-color: #fff;
+            transition: all .4s;
+            border-radius: 4px;
+        }
+
+        .organization-detail__wrapper > div > p > a:hover {
+            color: var(--second-color);
+            background-color: var(--second-color);
+            color: #fff;
+        }
+
+        .organization-detail__wrapper > div:nth-child(1) {
+            display: block;
+        }
+
+        .organization-detail__wrapper > div:nth-child(1) > p > img {
+            border-radius: 4px;
+
+        }
+        .organization-detail__map {
+            border-radius: 4px;
+        }
+        .leaflet-top {
+            z-index: 400;
+        }
+
+        .organization-detail__title {
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--second-color);
+            text-align: center;
+            text-transform: uppercase;
+            color: var(--second-color);
+        }
+
+        .organization-prop > p > a:after {
+            content: "\f360";
+            font-family: 'Font Awesome 5 Pro';
+            margin-left: 5px;
+        }
+
+        .organization-prop {
+            margin: 10px 0;
+        }
+        .organization-prop-key {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        .organization-prop-value {
+            margin: 0;
+        }
+        .organization-prop-icon {
+            text-align: center;
+            margin-right: 10px;
+            width: 14px;
+            height: 14px;
+        }
+
+        @media (max-width: 992px) {
+            .organization-detail__map {
+                height: 400px !important;
+            }
+        }
+        @media (max-width: 576px) {
+            .organization-detail__wrapper > div {
+                flex-direction: column;
+            }
+        }
+
+    </style>
+{% endblock %}
+
+{% block js %}
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="{% static 'custom/plugins/jquery.fancybox/jquery.fancybox.min.js' %}"></script>
+
+    <script>
+        let element = document.getElementById('osm-map');
+        element.style = 'height:100%;';
+        let map = L.map(element);
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: ''}).addTo(map);
+        let target = L.latLng(
+            '{{ organization.location.latitude|normalize_lat_lon }}',
+            '{{ organization.location.longitude|normalize_lat_lon }}'
+        );
+        map.setView(target, 14);
+        L.marker(target).addTo(map);
+
+        $('.organization-detail__img img').wrap(function () {
+            return "<a class='no_hover' href='" + this.attributes['src'].value + "' data-fancybox='gallery'></a>";
+        });
+    </script>
+
+{% endblock %}
+
+{% block content %}
+    <div class="organization-detail">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-12 mb-3">
+                    <div class="organization-detail__title title">
+                        <p>{{ organization.title }}</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 mb-4">
+                    <div class="organization-detail__map" id="osm-map"></div>
+                </div>
+
+                <div class="col-lg-6 mb-4">
+                    <div class="organization-detail__wrapper">
+                        <div class="organization-detail__img">
+                            <p>
+                                <img src="{{ organization.main_image.url }}"
+                                     alt="{{ organization.title }}"
+                                    class="img-fluid"/>
+                            </p>
+                        </div>
+                        <div class="organization-detail__descr">
+                            <p>{{ organization.description }}</p>
+                        </div>
+
+                        <div class="organization-detail__office organization-prop">
+                            <b class="organization-prop-key"><i class="organization-prop-icon fa fa-building-o" aria-hidden="true"></i>{% trans 'Head of office' %}: </b>
+                            <p class="organization-prop-value pl-2">{{ organization.head_of_office }}</p>
+                        </div>
+                        <div class="organization-detail__address organization-prop">
+                            <b class="organization-prop-key"><i class="organization-prop-icon fa fa-map-marker" aria-hidden="true"></i>{% trans 'Address' %}: </b>
+                            <p class="organization-prop-value pl-2">{{ organization.address }}</p>
+                        </div>
+
+                        <div class="organization-detail__category organization-prop">
+                            <b class="organization-prop-key"><i class="organization-prop-icon fa fa-list-alt" aria-hidden="true"></i>{% trans 'Category' %}: </b>
+                            <p class="organization-prop-value pl-2">{{ organization.organization_category }}</p>
+                        </div>
+
+                        <div class="organization-detail__tel organization-prop">
+                            <b class="organization-prop-key"><i class="organization-prop-icon fa fa-phone-square" aria-hidden="true"></i>{% trans 'Phone number' %}: </b>
+                            <p class="organization-prop-value pl-2"><a href="tel:{{ organization.tel }}">{{ organization.tel }}</a></p>
+                        </div>
+                        <div class="organization-detail__website organization-prop">
+                            <b class="organization-prop-key"><i class="organization-prop-icon fa fa-globe" aria-hidden="true"></i>{% trans 'Website' %}: </b>
+                            <p class="organization-prop-value pl-2"><a href="{{ organization.website }}">{{ organization.website }}</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="organization-detail__content">
+                        <div>{{ organization.content|safe }}</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
