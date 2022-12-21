@@ -172,7 +172,7 @@ class StatisticalDataAdmin(PaginationMixin, admin.ModelAdmin):
 
 @admin.register(models.SiteSettings)
 class SiteSettingsAdmin(PaginationMixin, parler_admin.TranslatableAdmin):
-    def has_add_permission(self, request): return False
+    def has_add_permission(self, request): return True
     def has_delete_permission(self, request, obj=None): return False
 
 
