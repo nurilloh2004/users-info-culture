@@ -734,3 +734,11 @@ class AlbumImage(parler_models.TranslatableModel):
 
     def __str__(self): return f"{self.album.safe_translation_getter('title')}"
 
+
+
+class Json(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name

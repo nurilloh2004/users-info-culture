@@ -4,10 +4,29 @@ from django.utils.translation import gettext as _
 from adminsortable2 import admin as adminsortable2_admin
 from mptt import admin as mptt_admin
 from parler import admin as parler_admin
-
+from ckeditor.widgets import CKEditorWidget
 from project import settings
-
+from django import forms
+from .models import *
 from . import models
+
+
+
+class JsonModelForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorWidget())
+
+    class Meta:
+        model = Json
+        fields = '__all__'
+
+
+
+class JsonAdmin(admin.ModelAdmin):
+    form = JsonModelForm
+
+admin.site.register(Json, JsonAdmin)
+
+
 
 
 class PaginationMixin:

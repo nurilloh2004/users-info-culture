@@ -6,7 +6,7 @@ import pytz
 import pendulum
 import dateutil.parser
 from dateutil import relativedelta
-
+from django.shortcuts import render
 from django import urls, shortcuts, http
 from django import forms as django_forms
 from django.contrib import messages
@@ -119,6 +119,12 @@ class StaticDetail(IncrementViewCount, FilterLanguageMixin, generic.DetailView):
     model = models.Static
     context_object_name = "static"
     pk_url_kwarg = 'id'
+
+
+def formatJson(request):
+    jsonData = models.Json.objects.all()
+    context = {'jsonData' : jsonData}
+    return render(request, "pages/static/json.html", context=context)
 
 
 class PersonList(FilterLanguageMixin, generic.ListView):

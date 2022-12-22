@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<body>
+    Json data
+        {% for j in jsonData %}
+            <h1>{{j.name}}</h1>
+            <a>{{j.description | safe }}</a>
+        {% endfor %}
+</body>
+
+</html>
+{% endblock content %}

@@ -17,6 +17,7 @@ urlpatterns = [
     path('post/<int:id>', views.PostDetail.as_view(), name='post_detail'),
 
     path('static/<int:id>', views.StaticDetail.as_view(), name='static_detail'),
+    path('json/', views.formatJson, name='json'),
 
     path('application', views.ApplicationForm.as_view(), name='application_form'),
     path('contact', views.ContactPage.as_view(), name='contact_view'),
