@@ -737,7 +737,7 @@ class AlbumImage(parler_models.TranslatableModel):
 
 
 class Json(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=50000)
     description = models.TextField()
 
     def __str__(self):

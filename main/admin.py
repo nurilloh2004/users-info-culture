@@ -21,10 +21,10 @@ class JsonModelForm(forms.ModelForm):
 
 
 
-class JsonAdmin(admin.ModelAdmin):
-    form = JsonModelForm
+# class JsonAdmin(admin.ModelAdmin):
+#     form = JsonModelForm
 
-admin.site.register(Json, JsonAdmin)
+admin.site.register(Json)
 
 
 
